@@ -1,0 +1,29 @@
+return {
+  -- nvim-ufo configuration
+  -- {
+  --   "kevinhwang91/nvim-ufo",
+  --   dependencies = { "kevinhwang91/promise-async" }, -- nvim-ufo dependency
+  --   event = { "BufReadPost", "BufNewFile" },         -- Lazy load nvim-ufo when opening files
+  --   config = function()
+  --     -- Setup nvim-ufo with treesitter
+  --     require('ufo').setup({
+  --       provider_selector = function(bufnr, filetype, buftype)
+  --         -- Use treesitter and fallback to indent
+  --         return { 'treesitter', 'indent' }
+  --       end,
+  --     })
+  --
+  --     -- Keybindings for folding
+  --     vim.api.nvim_set_keymap('n', 'zR', [[<Cmd>lua require('ufo').openAllFolds()<CR>]],
+  --       { noremap = true, silent = true })
+  --     vim.api.nvim_set_keymap('n', 'zM', [[<Cmd>lua require('ufo').closeAllFolds()<CR>]],
+  --       { noremap = true, silent = true })
+  --     vim.api.nvim_set_keymap('n', 'zr', [[<Cmd>lua require('ufo').openFoldsExceptKinds()<CR>]],
+  --       { noremap = true, silent = true })
+  --     vim.api.nvim_set_keymap('n', 'zm', [[<Cmd>lua require('ufo').closeFoldsWith()<CR>]],
+  --       { noremap = true, silent = true })
+  --     vim.api.nvim_set_keymap('n', 'K', [[<Cmd>lua require('ufo').peekFoldedLinesUnderCursor()<CR>]],
+  --       { noremap = true, silent = true })
+  --   end,
+  -- }
+}
