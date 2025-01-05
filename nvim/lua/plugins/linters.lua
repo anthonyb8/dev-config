@@ -4,7 +4,8 @@ return {
 		config = function()
 			require("lint").linters_by_ft = {
 				python = { "ruff" }, -- Python linters
-				cpp = { "cppcheck", "cpplint" }, -- C++ linters
+				cpp = { "cppcheck" }, -- C++ linters
+				-- c = { "cppcheck" },
 				sh = { "shellcheck" },
 				bash = { "shellcheck" },
 				-- rust = { "clippy" },             -- Rust linter

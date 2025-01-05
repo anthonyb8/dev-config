@@ -11,7 +11,6 @@ return {
 							exe = "black", -- Ensure black is installed
 							args = { "--fast", "--line-length", "79", "-" },
 							stdin = true,
-							-- async = true  -- Make it asynchronous
 						}
 					end,
 				},
@@ -26,6 +25,16 @@ return {
 					end,
 				},
 				cpp = {
+					-- Clang format for C++
+					function()
+						return {
+							exe = "clang-format", -- Ensure clang-format is installed
+							args = { "--style=Google" },
+							stdin = true,
+						}
+					end,
+				},
+				h = {
 					-- Clang format for C++
 					function()
 						return {
@@ -56,8 +65,8 @@ return {
 						}
 					end,
 				},
-				-- Bash
 				sh = {
+					-- Bash
 					function()
 						return {
 							exe = "shfmt",
@@ -66,12 +75,60 @@ return {
 						}
 					end,
 				},
-				-- JSON configuration using Prettier
 				json = {
+					-- JSON configuration using Prettier
 					function()
 						return {
 							exe = "prettier",
 							args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0), "--single-quote" },
+							stdin = true,
+						}
+					end,
+				},
+				markdown = {
+					-- md
+					function()
+						return {
+							exe = "prettier",
+							args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0) },
+							stdin = true,
+						}
+					end,
+				},
+				javascript = {
+					-- Js
+					function()
+						return {
+							exe = "prettier",
+							args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0) },
+							stdin = true,
+						}
+					end,
+				},
+				javascriptreact = {
+					-- Jsx
+					function()
+						return {
+							exe = "prettier",
+							args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0) },
+							stdin = true,
+						}
+					end,
+				},
+				typescript = {
+					function()
+						return {
+							exe = "prettier",
+							args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0) },
+							stdin = true,
+						}
+					end,
+				},
+				typescriptreact = {
+					function()
+						return {
+							exe = "prettier",
+							args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0) },
 							stdin = true,
 						}
 					end,
@@ -82,7 +139,21 @@ return {
 		-- Format on save
 		vim.api.nvim_create_augroup("FormatAutogroup", { clear = true })
 		vim.api.nvim_create_autocmd("BufWritePost", {
-			pattern = { "*.py", "*.rs", "*.cpp", "*.sh", "*.json", "*.lua" },
+			pattern = {
+				"*.py",
+				"*.rs",
+				"*.cpp",
+				"*.h",
+				"*.hpp",
+				"*.sh",
+				"*.json",
+				"*.lua",
+				"*.js",
+				"*.jsx",
+				"*.ts",
+				"*.tsx",
+				"*.md",
+			},
 			command = "FormatWrite",
 			group = "FormatAutogroup",
 		})

@@ -101,9 +101,7 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 export PATH="$HOME/.local/bin:$PATH"
-
 export PATH="/Users/anthony/.vscode-dotnet-sdk/.dotnet:$PATH"
-#export PATH="/usr/local/bin:$PATH"
 export PATH="/usr/local/Cellar/node/21.1.0/lib/node_modules:$PATH"
 
 export PATH="/usr/local/opt/python@3.12/bin:$PATH"
@@ -135,12 +133,11 @@ act() {
 }
 export NVIM_TUI_ENABLE_TRUE_COLOR=1
 unalias deactivate 2>/dev/null
-# Alias to deactivate the virtual environment
-# alias deactivate="deactivate"
 
+# NVM (Node Version Manager)
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # Load NVM
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # Load NVM bash_completion
 
 # PostgreSQL 15 binaries and libraries
 export PATH="/usr/local/opt/postgresql@15/bin:$PATH"
@@ -150,21 +147,82 @@ export PKG_CONFIG_PATH="/usr/local/opt/postgresql@15/lib/pkgconfig"
 export DYLD_LIBRARY_PATH="/usr/local/opt/postgresql@15/lib:$DYLD_LIBRARY_PATH"
 export PG_HOME="/usr/local/opt/postgresql@15"
 
-# Additional environment variables for pyo3 build
+# Environment variables for PyO3 (Python-Rust bindings)
 export LIBRARY_PATH="/usr/local/opt/openssl/lib:/usr/local/opt/llvm/lib:/usr/local/opt/python@3.12/lib"
 export CPATH="/usr/local/opt/openssl/include:/usr/local/opt/llvm/include:/usr/local/opt/python@3.12/include/python3.12"
-export PATH="/usr/local/opt/llvm/bin:$PATH"
+export PATH="/usr/local/opt/llvm/bin:/usr/local/opt/python@3.12/bin:$PATH"
 export LDFLAGS="-L/usr/local/opt/openssl/lib -L/usr/local/opt/llvm/lib -L/usr/local/opt/python@3.12/lib"
 export CPPFLAGS="-I/usr/local/opt/openssl/include -I/usr/local/opt/llvm/include -I/usr/local/opt/python@3.12/include/python3.12"
-export PYO3_PYTHON=/usr/local/opt/python@3.12/bin/python3.12
+export PYO3_PYTHON="/usr/local/opt/python@3.12/bin/python3.12"
 
-# Midas-cli tool
-export PATH=$PATH:/usr/local/midas
+# Midas-CLI tool
+# export PATH="/usr/local/midas:$PATH"
 
-# Starship
+# Starship prompt
 eval "$(starship init zsh)"
 
-#DELETE
-export DATABENTO_KEY="db-UjkucTkmJL4eHKUCX4nRhvXgrwpx9"
-export MIDAS_URL="http://127.0.0.1:8080"
+# LLVM environment variables
+export PATH="/usr/local/opt/llvm/bin:$PATH"
+export LDFLAGS="-L/usr/local/opt/llvm/lib"
+export CPPFLAGS="-I/usr/local/opt/llvm/include"
+export DYLD_LIBRARY_PATH="/usr/local/opt/llvm/lib:$DYLD_LIBRARY_PATH"
+export CC="/usr/local/opt/llvm/bin/clang"
+export CXX="/usr/local/opt/llvm/bin/clang++"
 
+# Vcpkg (C++ package manager)
+export PATH="$HOME/vcpkg:$PATH"
+export VCPKG_ROOT="$HOME/vcpkg"
+export CMAKE_TOOLCHAIN_FILE="$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake"
+export CMAKE_PREFIX_PATH="$VCPKG_ROOT/installed/x64-osx:$CMAKE_PREFIX_PATH"
+
+# Alias to deactivate the virtual environment
+# alias deactivate="deactivate"
+
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+#
+# # PostgreSQL 15 binaries and libraries
+# export PATH="/usr/local/opt/postgresql@15/bin:$PATH"
+# export LDFLAGS="-L/usr/local/opt/postgresql@15/lib"
+# export CPPFLAGS="-I/usr/local/opt/postgresql@15/include"
+# export PKG_CONFIG_PATH="/usr/local/opt/postgresql@15/lib/pkgconfig"
+# export DYLD_LIBRARY_PATH="/usr/local/opt/postgresql@15/lib:$DYLD_LIBRARY_PATH"
+# export PG_HOME="/usr/local/opt/postgresql@15"
+#
+# # Additional environment variables for pyo3 build
+# export LIBRARY_PATH="/usr/local/opt/openssl/lib:/usr/local/opt/llvm/lib:/usr/local/opt/python@3.12/lib"
+# export CPATH="/usr/local/opt/openssl/include:/usr/local/opt/llvm/include:/usr/local/opt/python@3.12/include/python3.12"
+# export PATH="/usr/local/opt/llvm/bin:$PATH"
+# export LDFLAGS="-L/usr/local/opt/openssl/lib -L/usr/local/opt/llvm/lib -L/usr/local/opt/python@3.12/lib"
+# export CPPFLAGS="-I/usr/local/opt/openssl/include -I/usr/local/opt/llvm/include -I/usr/local/opt/python@3.12/include/python3.12"
+# export PYO3_PYTHON=/usr/local/opt/python@3.12/bin/python3.12
+#
+# # Midas-cli tool
+# export PATH=$PATH:/usr/local/midas
+#
+# # Starship
+# eval "$(starship init zsh)"
+#
+# #DELETE
+# export MIDAS_URL="http://127.0.0.1:8080"
+#
+# # LLVM
+# export PATH="/usr/local/opt/llvm/bin:$PATH"
+# export LDFLAGS="-L/usr/local/opt/llvm/lib"
+# export CPPFLAGS="-I/usr/local/opt/llvm/include"
+#
+# # export PATH="/usr/local/opt/llvm/bin:$PATH"
+# # export DYLD_LIBRARY_PATH="/usr/local/opt/llvm/lib:$DYLD_LIBRARY_PATH"
+# # export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+# # export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
+# # export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
+# # export CC=clang
+# # export CXX=clang++
+#
+# #Vcpkg 
+# export PATH="$HOME/vcpkg:$PATH"
+# export VCPKG_ROOT=/Users/anthony/vcpkg
+# export CMAKE_TOOLCHAIN_FILE=/Users/anthony/vcpkg/scripts/buildsystems/vcpkg.cmake
+#
+# export DYLD_LIBRARY_PATH=/usr/local/opt/llvm/lib:$DYLD_LIBRARY_PATH

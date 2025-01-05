@@ -43,6 +43,7 @@ return {
 			-- Language server configurations
 			lspconfig.ts_ls.setup({
 				capabilities = capabilities,
+				on_attach = on_attach,
 			})
 			lspconfig.solargraph.setup({
 				capabilities = capabilities,
@@ -61,12 +62,37 @@ return {
 				--   debounce_text_changes = 150,  -- Optional debounce setting
 				-- }
 			})
+			lspconfig.marksman.setup({
+				capabilities = capabilities,
+				on_attach = on_attach,
+			})
 
 			-- C++
 			lspconfig.clangd.setup({
 				capabilities = capabilities,
-				cmd = { "clangd", "--background-index", "--suggest-missing-includes", "--clang-tidy" },
+				on_attach = on_attach,
+				cmd = {
+					vim.fn.stdpath("data") .. "/mason/bin/clangd", --"clangd", -- Ensure this points to the correct version (Mason or system)
+					"--background-index",
+					"--clang-tidy=false", -- Disable clang-tidy; enable if needed
+					"--log=verbose", -- Enable verbose logging for debugging
+				},
+				root_dir = lspconfig.util.root_pattern("compile_commands.json", ".git"),
+				init_options = {
+					clangdFileStatus = true, -- Enable file status updates
+					fallbackFlags = { "-std=c++17" }, -- Fallback to C++17 if flags are missing
+				},
+				flags = {
+					debounce_text_changes = 150, -- Avoid excessive diagnostics
+				},
 			})
+
+			-- lspconfig.clangd.setup({
+			-- 	capabilities = capabilities,
+			-- 	on_attach = on_attach,
+			-- 	cmd = { "clangd", "--background-index", "--suggest-missing-includes", "--clang-tidy=false" },
+			-- 	root_dir = lspconfig.util.root_pattern("compile_commands.json", ".git"),
+			-- })
 
 			-- -- Python
 			-- lspconfig.pyright.setup({
@@ -135,6 +161,17 @@ return {
 					},
 				},
 			})
+			-- Work around for rust_analyzer: -32802 : serevr cancelled the request 11/14/2024 --
+			for _, method in ipairs({ "textDocument/diagnostic", "workspace/diagnostic" }) do
+				local default_diagnostic_handler = vim.lsp.handlers[method]
+				vim.lsp.handlers[method] = function(err, result, context, config)
+					if err ~= nil and err.code == -32802 then
+						return
+					end
+					return default_diagnostic_handler(err, result, context, config)
+				end
+			end
+			--
 		end,
 	},
 
