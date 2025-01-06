@@ -6,7 +6,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # Define the directories/files to restore
 CONFIG_FILES=(
 	"$SCRIPT_DIR/nvim"       # Example: Neovim config
-	"$SCRIPT_DIR/kitty.conf" # Example: Kitty terminal config
+	"$SCRIPT_DIR/kitty"      # Example: Kitty terminal config
 	"$SCRIPT_DIR/.tmux.conf" # Example: Tmux config
 	# "$SCRIPT_DIR/.zshrc"           # Example: Zsh config file
 	"$SCRIPT_DIR/starship.toml" # Starship config
@@ -15,7 +15,7 @@ CONFIG_FILES=(
 # Define where to move the configurations on the machine
 TARGET_DIRS=(
 	"$HOME/.config/nvim"
-	"$HOME/.config/kitty/kitty.conf"
+	"$HOME/.config/kitty"
 	"$HOME/.tmux.conf"
 	# "$HOME/.zshrc"
 	"$HOME/.config/starship.toml"

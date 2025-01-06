@@ -2,11 +2,11 @@
 
 # Define the directories/files to back up
 CONFIG_FILES=(
-	"$HOME/.config/nvim"             # Neovim config
-	"$HOME/.config/kitty/kitty.conf" # Kitty terminal config
-	"$HOME/.tmux.conf"               # Tmux config
-	"$HOME/.zshrc"                   # Zsh config file
-	"$HOME/.config/starship.toml"    # Starship config
+	"$HOME/.config/nvim"          # Neovim config
+	"$HOME/.config/kitty"         # Kitty terminal config
+	"$HOME/.tmux.conf"            # Tmux config
+	"$HOME/.zshrc"                # Zsh config file
+	"$HOME/.config/starship.toml" # Starship config
 )
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
