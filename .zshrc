@@ -175,6 +175,10 @@ export VCPKG_ROOT="$HOME/vcpkg"
 export CMAKE_TOOLCHAIN_FILE="$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake"
 export CMAKE_PREFIX_PATH="$VCPKG_ROOT/installed/x64-osx:$CMAKE_PREFIX_PATH"
 
+
+# Neofetch
+neofetch
+
 # Alias to deactivate the virtual environment
 # alias deactivate="deactivate"
 
