@@ -22,6 +22,8 @@ eval "$(starship init zsh)"
 # Terminal 
 https://sw.kovidgoyal.net/kitty/binary/
 
+sudo update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator /usr/local/bin/kitty 50
+
 # Tmux 
 sudo apt install tmux
 
