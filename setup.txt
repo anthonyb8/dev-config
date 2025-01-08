@@ -1,0 +1,59 @@
+# Git / Curl / Nvim
+sudo apt update 
+sudo apt upgrade
+sudo apt install curl 
+sudo apt install git 
+sudo apt install neovim
+sudo apt install gnome-tweaks
+sudo apt install gnome-shell-extensions
+sudo apt install gnome-shell-extension-prefs
+sudo apt install neofetch 
+
+# Shell 
+sudo apt install zsh 
+https://ohmyz.sh/#install
+
+# Starship
+https://starship.rs/
+
+# Add to shell ~/.zshrc
+eval "$(starship init zsh)"
+
+# Terminal 
+https://sw.kovidgoyal.net/kitty/binary/
+
+# Tmux 
+sudo apt install tmux
+
+# SSH git
+ssh-keygen -t rsa -b 4096 -f ~/.ssh/git
+cat ~/.ssh/git.pub
+
+#add to github
+ssh -T git@github.com
+
+# Rust 
+https://www.rust-lang.org/tools/install
+source "$HOME/.cargo/env"
+
+# NVM/NODE/NPM/YARN
+https://github.com/nvm-sh/nvm?tab=readme-ov-file
+nvm install node
+npm install --global yarn
+
+# Lazy git 
+LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
+curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
+tar xf lazygit.tar.gz lazygit
+sudo install lazygit /usr/local/bin
+
+# Nerd Fonts
+# Download desired and unzip
+https://www.nerdfonts.com/font-downloads 
+
+mkdir -p ~/.local/share/fonts
+mv ~/Downloads/FiraCode/* ~/.local/share/fonts/
+fc-cache -fv
+
+fc-list | grep "FiraCode"
+
