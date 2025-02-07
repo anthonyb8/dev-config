@@ -94,31 +94,31 @@ return {
 			-- 	root_dir = lspconfig.util.root_pattern("compile_commands.json", ".git"),
 			-- })
 
-			-- -- Python
-			-- lspconfig.pyright.setup({
-			--   capabilities = capabilities,
-			--   on_attach = function(client, bufnr)
-			--     client.server_capabilities.documentFormattingProvider = false  -- New field
-			--     on_attach(client, bufnr)
-			--   end,
-			-- })
 			-- Python
-			lspconfig.pylsp.setup({
+			lspconfig.pyright.setup({
 				capabilities = capabilities,
 				on_attach = function(client, bufnr)
-					client.server_capabilities.documentFormattingProvider = false -- Disable formatting if needed
+					client.server_capabilities.documentFormattingProvider = false -- New field
 					on_attach(client, bufnr)
 				end,
-				settings = {
-					pylsp = {
-						plugins = {
-							pycodestyle = {
-								enabled = false, -- Disable pycodestyle
-							},
-						},
-					},
-				},
 			})
+			-- Python
+			-- lspconfig.pylsp.setup({
+			-- 	capabilities = capabilities,
+			-- 	on_attach = function(client, bufnr)
+			-- 		client.server_capabilities.documentFormattingProvider = false -- Disable formatting if needed
+			-- 		on_attach(client, bufnr)
+			-- 	end,
+			-- 	settings = {
+			-- 		pylsp = {
+			-- 			plugins = {
+			-- 				pycodestyle = {
+			-- 					enabled = false, -- Disable pycodestyle
+			-- 				},
+			-- 			},
+			-- 		},
+			-- 	},
+			-- })
 
 			-- Rust
 			lspconfig.rust_analyzer.setup({

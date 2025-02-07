@@ -8,8 +8,8 @@ export ZSH="/Users/anthony/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="robbyrussell"
-
+# ZSH_THEME="robbyrussell"
+ZSH_THEME="gruvbox"
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in $ZSH/themes/
@@ -74,31 +74,15 @@ plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
-# User configuration
+# Reset cursor style (add this if not present)
+export TERM=xterm-256color
 
-# export MANPATH="/usr/local/man:$MANPATH"
+# Start tmux automatically
+if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
+    tmux attach -t default || tmux new -s default
+fi
 
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
 
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
 
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="/Users/anthony/.vscode-dotnet-sdk/.dotnet:$PATH"
@@ -108,10 +92,6 @@ export PATH="/usr/local/opt/python@3.12/bin:$PATH"
 alias python3='/usr/local/opt/python@3.12/bin/python3.12'
 alias pip3='/usr/local/opt/python@3.12/bin/pip3'
 
-# alias vim='lvim'
-# export EDITOR='lvim'
-# alias openfile='/usr/local/bin/lvim-open' 
-# export NVIM_LISTEN_ADDRESS=/tmp/nvim.sock
 
 alias vim='nvim'
 export EDITOR='nvim'
@@ -120,10 +100,10 @@ export NVIM_LISTEN_ADDRESS=/tmp/nvim.sock
 
 
 # Reset cursor style (add this if not present)
-export TERM=xterm-256color
+# export TERM=xterm-256color
 
 # Function to activate a virtual environment
-act() {
+ax() {
   if [ -f "venv/bin/activate" ]; then
     source "venv/bin/activate"
     # echo "Activated virtual environment: venv"
@@ -155,12 +135,6 @@ export LDFLAGS="-L/usr/local/opt/openssl/lib -L/usr/local/opt/llvm/lib -L/usr/lo
 export CPPFLAGS="-I/usr/local/opt/openssl/include -I/usr/local/opt/llvm/include -I/usr/local/opt/python@3.12/include/python3.12"
 export PYO3_PYTHON="/usr/local/opt/python@3.12/bin/python3.12"
 
-# Midas-CLI tool
-# export PATH="/usr/local/midas:$PATH"
-
-# Starship prompt
-eval "$(starship init zsh)"
-
 # LLVM environment variables
 export PATH="/usr/local/opt/llvm/bin:$PATH"
 export LDFLAGS="-L/usr/local/opt/llvm/lib"
@@ -175,11 +149,19 @@ export VCPKG_ROOT="$HOME/vcpkg"
 export CMAKE_TOOLCHAIN_FILE="$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake"
 export CMAKE_PREFIX_PATH="$VCPKG_ROOT/installed/x64-osx:$CMAKE_PREFIX_PATH"
 
-# Neofetch
-neofetch
+export JAVA_HOME=$(/usr/libexec/java_home -v 13)
 
 # Kitty
-KITTY_OS="macos"
+# KITTY_OS="macos"
+
+# Midas
+# export RAW_DIR="$HOME/projects/midas/midas-server/data"
+# export PROCESSED_DIR="$HOME/projects/midas/midas-server/data/processed_data"
+
+# Pypi 
+# export TWINE_USERNAME="__token__"
+# export TWINE_PASSWORD="<your-api-token>"
+
 
 
 # Alias to deactivate the virtual environment
@@ -233,3 +215,4 @@ KITTY_OS="macos"
 # export CMAKE_TOOLCHAIN_FILE=/Users/anthony/vcpkg/scripts/buildsystems/vcpkg.cmake
 #
 # export DYLD_LIBRARY_PATH=/usr/local/opt/llvm/lib:$DYLD_LIBRARY_PATH
+export JAVA_HOME=$(/usr/libexec/java_home -v 13)
