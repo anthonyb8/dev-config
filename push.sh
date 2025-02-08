@@ -2,10 +2,9 @@
 
 # Define the directories/files to back up
 CONFIG_FILES=(
-	"$HOME/.config/nvim"  # Neovim config
-	"$HOME/.config/kitty" # Kitty terminal config
-	"$HOME/.tmux.conf"    # Tmux config
-	# "$HOME/.zshrc"                # Zsh config file
+	"$HOME/.config/nvim"          # Neovim config
+	"$HOME/.config/kitty"         # Kitty terminal config
+	"$HOME/.tmux.conf"            # Tmux config
 	"$HOME/.config/starship.toml" # Starship config
 )
 
@@ -18,11 +17,14 @@ done
 
 cp -r "$HOME/.config/alacritty/alacritty.toml" "$SCRIPT_DIR/alacritty/"
 
-cp -r "$HOME/.zshrc" "$SCRIPT_DIR/zsh/"
-
-cp -r "$HOME/.oh-my-zsh/custom/themes/gruvbox.zsh-theme" "$SCRIPT_DIR/zsh/"
+# .zshrc
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+	cp "$HOME/.zshrc" "$SCRIPT_DIR/zsh/linux/"
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+	cp "$HOME/.zshrc" "$SCRIPT_DIR/zsh/macos/"
+fi
 
 # Add, commit, and push the changes to GitHub
-# git add .
-# git commit -m "Update configuration files"
-# git push origin main
+git add .
+git commit -m "Update configuration files"
+git push origin main

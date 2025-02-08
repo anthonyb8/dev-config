@@ -8,7 +8,8 @@ CONFIG_FILES=(
 	"$SCRIPT_DIR/nvim"       # Example: Neovim config
 	"$SCRIPT_DIR/kitty"      # Example: Kitty terminal config
 	"$SCRIPT_DIR/.tmux.conf" # Example: Tmux config
-	# "$SCRIPT_DIR/.zshrc"           # Example: Zsh config file
+	"$SCRIPT_DIR/alacritty/alacritty.toml"
+	"$SCRIPT_DIR/zsh/themes"
 	"$SCRIPT_DIR/starship.toml" # Starship config
 )
 
@@ -17,13 +18,14 @@ TARGET_DIRS=(
 	"$HOME/.config/nvim"
 	"$HOME/.config/kitty"
 	"$HOME/.tmux.conf"
-	# "$HOME/.zshrc"
+	"$HOME/.config/alacritty/alacritty.toml"
+	"$HOME/.oh-my-zsh/custom/themes"
 	"$HOME/.config/starship.toml"
 )
 
 # Pull the latest changes from GitHub
 cd "$SCRIPT_DIR" || exit
-git pull
+# git pull
 
 # Restore the configuration files by movi# Restore the configuration files with backups
 for i in "${!CONFIG_FILES[@]}"; do
@@ -47,3 +49,12 @@ for i in "${!CONFIG_FILES[@]}"; do
 		cp "${CONFIG_FILES[i]}" "${TARGET_DIRS[i]}"
 	fi
 done
+
+# .zshrc
+mv "$HOME/.zshrc" "$HOME/.zshrc_bak"
+
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+	cp "$SCRIPT_DIR/zsh/linux/.zshrc" "$HOME/.zshrc"
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+	cp "$SCRIPT_DIR/zsh/macos/.zshrc" "$HOME/.zshrc"
+fi

@@ -215,4 +215,4 @@ export JAVA_HOME=$(/usr/libexec/java_home -v 13)
 # export CMAKE_TOOLCHAIN_FILE=/Users/anthony/vcpkg/scripts/buildsystems/vcpkg.cmake
 #
 # export DYLD_LIBRARY_PATH=/usr/local/opt/llvm/lib:$DYLD_LIBRARY_PATH
-export JAVA_HOME=$(/usr/libexec/java_home -v 13)
+# export JAVA_HOME=$(/usr/libexec/java_home -v 13)

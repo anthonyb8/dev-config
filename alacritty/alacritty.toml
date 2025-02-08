@@ -1,15 +1,14 @@
+[general]
+import = ["~/.config/alacritty/themes/themes/gruvbox_dark.toml"]
+
 [env]
 TERM="ixterm-256color"
 
-[general]
-import = [
-    "~/.config/alacritty/themes/themes/gruvbox_dark.toml"
-]
 [window]
 # padding.y = 1
 # padding.x = 1 
 decorations = "Buttonless"
-opacity = 0.6
+opacity = 0.95
 blur= true
 
 [font]
