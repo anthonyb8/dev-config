@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # If you come from bash you might have to change your $PATH.
 # export PATH="/usr/local/bin:$PATH"
 
@@ -9,7 +16,7 @@ export ZSH="/Users/anthony/.oh-my-zsh"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 # ZSH_THEME="robbyrussell"
-ZSH_THEME="gruvbox"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in $ZSH/themes/
@@ -152,7 +159,7 @@ export CMAKE_PREFIX_PATH="$VCPKG_ROOT/installed/x64-osx:$CMAKE_PREFIX_PATH"
 export JAVA_HOME=$(/usr/libexec/java_home -v 13)
 
 # Kitty
-# KITTY_OS="macos"
+KITTY_OS="macos"
 
 # Midas
 # export RAW_DIR="$HOME/projects/midas/midas-server/data"
@@ -215,4 +222,10 @@ export JAVA_HOME=$(/usr/libexec/java_home -v 13)
 # export CMAKE_TOOLCHAIN_FILE=/Users/anthony/vcpkg/scripts/buildsystems/vcpkg.cmake
 #
 # export DYLD_LIBRARY_PATH=/usr/local/opt/llvm/lib:$DYLD_LIBRARY_PATH
-# export JAVA_HOME=$(/usr/libexec/java_home -v 13)
+export JAVA_HOME=$(/usr/libexec/java_home -v 13)
+source /usr/local/share/powerlevel10k/powerlevel10k.zsh-theme
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

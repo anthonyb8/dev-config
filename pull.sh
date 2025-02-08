@@ -9,7 +9,6 @@ CONFIG_FILES=(
 	"$SCRIPT_DIR/kitty"      # Example: Kitty terminal config
 	"$SCRIPT_DIR/.tmux.conf" # Example: Tmux config
 	"$SCRIPT_DIR/alacritty/alacritty.toml"
-	"$SCRIPT_DIR/zsh/themes"
 	"$SCRIPT_DIR/starship.toml" # Starship config
 )
 
@@ -19,7 +18,6 @@ TARGET_DIRS=(
 	"$HOME/.config/kitty"
 	"$HOME/.tmux.conf"
 	"$HOME/.config/alacritty/alacritty.toml"
-	"$HOME/.oh-my-zsh/custom/themes"
 	"$HOME/.config/starship.toml"
 )
 
@@ -43,7 +41,7 @@ for i in "${!CONFIG_FILES[@]}"; do
 	# Copy the new configuration to the target
 	if [[ -d "${CONFIG_FILES[i]}" ]]; then
 		# If source is a directory, copy the directory
-		cp -rT "${CONFIG_FILES[i]}" "${TARGET_DIRS[i]}"
+		cp -r "${CONFIG_FILES[i]}" "${TARGET_DIRS[i]}"
 	elif [[ -f "${CONFIG_FILES[i]}" ]]; then
 		# If source is a file, copy the file
 		cp "${CONFIG_FILES[i]}" "${TARGET_DIRS[i]}"
