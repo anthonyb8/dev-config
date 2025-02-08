@@ -13,4 +13,5 @@ blur= true
 
 [font]
 normal.family="MesloLGS Nerd Font Mono"
+# normal.family="FireCode Nerd Font Mono"
 size = 12

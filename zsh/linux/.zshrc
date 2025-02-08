@@ -1,9 +1,11 @@
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
+# source /home/linuxbrew/.linuxbrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
@@ -16,6 +18,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="powerlevel10k/powerlevel10k"
+# ZSH_THEME="agnoster"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -110,17 +113,15 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 export TERM=xterm-256color
 
 # Start tmux automatically
-if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
-  tmux attach -t default || tmux new -s default
-fi
-
+# if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
+#   tmux attach -t default || tmux new -s default
+# fi
+#
 
 # Map nvim as vim
 alias vim='nvim'
@@ -159,4 +160,26 @@ export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="/home/linuxbrew/.linuxbrew/opt/postgresql@16/bin:$PATH"
 export PATH="/home/linuxbrew/.linuxbrew/opt/postgresql@14/bin:$PATH"
 
+KITTY_OS="linux"
 
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+# typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
+# typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
+# export LANG=en_US.UTF-8
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+
+# echo "TMUX variable: $TMUX"
+# # Start tmux automatically
+
+if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
+  export TERM=xterm-256color
+  tmux attach -t default || tmux new -s default
+fi
+#
+# if [ -z "$TMUX" ] && [ "$TERM" = "xterm-kitty" ]; then
+  # tmux attach || exec tmux new-session && exit;
+# fi 
+# sleep 0.5
+# tmux new-session 
+#[[ $TERM != "screen" ]] && exec tmux
