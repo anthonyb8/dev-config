@@ -1,4 +1,14 @@
-
+# if [ -z "$TMUX" ]; then
+#   while true; do
+#     read -k 1 "REPLY?Start tmux? [Yn]: "
+#     case $REPLY in
+#       "y"|"Y"|$'\n') exec tmux new-session -A -s && break ;;
+#       "n"|"N") echo "\ntmux not selected" && break;;
+#       *) clear && continue ;;
+#     esac
+#   done
+# fi
+#
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -121,7 +131,7 @@ export TERM=xterm-256color
 # if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
 #   tmux attach -t default || tmux new -s default
 # fi
-#
+
 
 # Map nvim as vim
 alias vim='nvim'
@@ -163,23 +173,13 @@ export PATH="/home/linuxbrew/.linuxbrew/opt/postgresql@14/bin:$PATH"
 KITTY_OS="linux"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-# typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
-# typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
-# export LANG=en_US.UTF-8
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 
-# echo "TMUX variable: $TMUX"
 # # Start tmux automatically
-
-if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
-  export TERM=xterm-256color
-  tmux attach -t default || tmux new -s default
-fi
-#
-# if [ -z "$TMUX" ] && [ "$TERM" = "xterm-kitty" ]; then
-  # tmux attach || exec tmux new-session && exit;
-# fi 
 # sleep 0.5
-# tmux new-session 
-#[[ $TERM != "screen" ]] && exec tmux
+#
+# if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
+#   export TERM=xterm-256color
+#   tmux attach -t default || tmux new -s default
+# fi
