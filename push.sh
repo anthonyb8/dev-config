@@ -25,6 +25,6 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
 fi
 
 # Add, commit, and push the changes to GitHub
-git add .
-git commit -m "Update configuration files"
-git push origin main
+# git add .
+# git commit -m "Update configuration files"
+# git push origin main

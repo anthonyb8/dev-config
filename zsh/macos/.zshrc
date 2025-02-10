@@ -89,6 +89,7 @@ export TERM=xterm-256color
 #     tmux attach -t default || tmux new -s default
 # fi
 
+source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 
 export PATH="$HOME/.local/bin:$PATH"
@@ -233,5 +234,4 @@ source /usr/local/share/powerlevel10k/powerlevel10k.zsh-theme
 if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
     tmux attach -t default || tmux new -s default
 fi
-
 
