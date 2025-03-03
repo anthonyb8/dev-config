@@ -5,8 +5,6 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# If you come from bash you might have to change your $PATH.
-# export PATH="/usr/local/bin:$PATH"
 
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/anthony/.oh-my-zsh"
@@ -15,7 +13,6 @@ export ZSH="/Users/anthony/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-# ZSH_THEME="robbyrussell"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -84,11 +81,6 @@ source $ZSH/oh-my-zsh.sh
 # Reset cursor style (add this if not present)
 export TERM=xterm-256color
 
-# # Start tmux automatically
-# if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
-#     tmux attach -t default || tmux new -s default
-# fi
-
 source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 
@@ -105,10 +97,6 @@ alias vim='nvim'
 export EDITOR='nvim'
 alias openfile='/usr/local/bin/nvim'
 export NVIM_LISTEN_ADDRESS=/tmp/nvim.sock
-
-
-# Reset cursor style (add this if not present)
-# export TERM=xterm-256color
 
 # Function to activate a virtual environment
 ax() {
@@ -162,67 +150,12 @@ export JAVA_HOME=$(/usr/libexec/java_home -v 13)
 # Kitty
 KITTY_OS="macos"
 
-# Midas
-# export RAW_DIR="$HOME/projects/midas/midas-server/data"
-# export PROCESSED_DIR="$HOME/projects/midas/midas-server/data/processed_data"
-
-# Pypi 
-# export TWINE_USERNAME="__token__"
-# export TWINE_PASSWORD="<your-api-token>"
-
-
-
-# Alias to deactivate the virtual environment
-# alias deactivate="deactivate"
-
-# export NVM_DIR="$HOME/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-#
-# # PostgreSQL 15 binaries and libraries
-# export PATH="/usr/local/opt/postgresql@15/bin:$PATH"
-# export LDFLAGS="-L/usr/local/opt/postgresql@15/lib"
-# export CPPFLAGS="-I/usr/local/opt/postgresql@15/include"
-# export PKG_CONFIG_PATH="/usr/local/opt/postgresql@15/lib/pkgconfig"
-# export DYLD_LIBRARY_PATH="/usr/local/opt/postgresql@15/lib:$DYLD_LIBRARY_PATH"
-# export PG_HOME="/usr/local/opt/postgresql@15"
-#
-# # Additional environment variables for pyo3 build
-# export LIBRARY_PATH="/usr/local/opt/openssl/lib:/usr/local/opt/llvm/lib:/usr/local/opt/python@3.12/lib"
-# export CPATH="/usr/local/opt/openssl/include:/usr/local/opt/llvm/include:/usr/local/opt/python@3.12/include/python3.12"
-# export PATH="/usr/local/opt/llvm/bin:$PATH"
-# export LDFLAGS="-L/usr/local/opt/openssl/lib -L/usr/local/opt/llvm/lib -L/usr/local/opt/python@3.12/lib"
-# export CPPFLAGS="-I/usr/local/opt/openssl/include -I/usr/local/opt/llvm/include -I/usr/local/opt/python@3.12/include/python3.12"
-# export PYO3_PYTHON=/usr/local/opt/python@3.12/bin/python3.12
-#
-# # Midas-cli tool
-# export PATH=$PATH:/usr/local/midas
-#
-# # Starship
-# eval "$(starship init zsh)"
-#
-# #DELETE
-# export MIDAS_URL="http://127.0.0.1:8080"
-#
-# # LLVM
-# export PATH="/usr/local/opt/llvm/bin:$PATH"
-# export LDFLAGS="-L/usr/local/opt/llvm/lib"
-# export CPPFLAGS="-I/usr/local/opt/llvm/include"
-#
-# # export PATH="/usr/local/opt/llvm/bin:$PATH"
-# # export DYLD_LIBRARY_PATH="/usr/local/opt/llvm/lib:$DYLD_LIBRARY_PATH"
-# # export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
-# # export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
-# # export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
-# # export CC=clang
-# # export CXX=clang++
-#
 # #Vcpkg 
 # export PATH="$HOME/vcpkg:$PATH"
 # export VCPKG_ROOT=/Users/anthony/vcpkg
 # export CMAKE_TOOLCHAIN_FILE=/Users/anthony/vcpkg/scripts/buildsystems/vcpkg.cmake
-#
 # export DYLD_LIBRARY_PATH=/usr/local/opt/llvm/lib:$DYLD_LIBRARY_PATH
+
 export JAVA_HOME=$(/usr/libexec/java_home -v 13)
 source /usr/local/share/powerlevel10k/powerlevel10k.zsh-theme
 
@@ -230,8 +163,7 @@ source /usr/local/share/powerlevel10k/powerlevel10k.zsh-theme
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 
-# Start tmux automatically
-if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
-    tmux attach -t default || tmux new -s default
+if [ -z "$TMUX" ]; then
+  /usr/local/bin/tmux
 fi
 
