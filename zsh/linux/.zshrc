@@ -1,24 +1,10 @@
-# if [ -z "$TMUX" ]; then
-#   while true; do
-#     read -k 1 "REPLY?Start tmux? [Yn]: "
-#     case $REPLY in
-#       "y"|"Y"|$'\n') exec tmux new-session -A -s && break ;;
-#       "n"|"N") echo "\ntmux not selected" && break;;
-#       *) clear && continue ;;
-#     esac
-#   done
-# fi
-#
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
-# source /home/linuxbrew/.linuxbrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
+source /home/linuxbrew/.linuxbrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -28,7 +14,6 @@ export ZSH="$HOME/.oh-my-zsh"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="powerlevel10k/powerlevel10k"
-# ZSH_THEME="agnoster"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -123,15 +108,16 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 export TERM=xterm-256color
 
-# Start tmux automatically
-# if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
-#   tmux attach -t default || tmux new -s default
-# fi
-
+ax() {
+  if [ -f "venv/bin/activate" ]; then
+    source "venv/bin/activate"
+  else 
+    echo "No virtual environment found in the current directory". 
+  fi
+}
 
 # Map nvim as vim
 alias vim='nvim'
@@ -143,29 +129,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# Midas Containers
-export POSTGRES_USER="anthony"
-export POSTGRES_PASSWORD="password"
-export POSTGRES_HOST="172.17.0.1"
-export TRADING_DATABASE_URL="postgres://postgres:password@172.17.0.1:5432/trading_data"
-export HISTORICAL_DATABASE_URL="postgres://postgres:password@172.17.0.1:5432/market_data"
-export INSTRUMENT_DATABASE_URL="postgres://postgres:password@172.17.0.1:5432/market_data"
-export HISTORICAL_PORT="8080"
-export TRADING_PORT="8081"
-export INSTRUMENT_PORT="8082"
-
-export LOG_DIR=/opt/midas/logs
-export DATA_DIR=/opt/midas/data
-# export POSTGRES_DIR=/opt/midas/postgres
-export SCRIPTS_DIR=/opt/midas/scripts
-export PROCESSED_DIR=/opt/midas/data/processed_data/
-export RAW_DIR=/opt/midas/data/raw_data/
-export CONFIG_DIR=~/.config/midas
-export BIN_DIR=/usr/local/bin
-export LIB_DIR=/usr/local/lib
-
-
-
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="/home/linuxbrew/.linuxbrew/opt/postgresql@16/bin:$PATH"
 export PATH="/home/linuxbrew/.linuxbrew/opt/postgresql@14/bin:$PATH"
@@ -175,11 +138,8 @@ KITTY_OS="linux"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+export PATH="/home/anthony/.local/bin:$PATH"
+export PATH="/home/anthony/.yarn/bin:$PATH"
+export PATH="/home/linuxbrew/.linuxbrew/opt/gnu-sed/bin:$PATH"
 
-# # Start tmux automatically
-# sleep 0.5
-#
-# if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
-#   export TERM=xterm-256color
-#   tmux attach -t default || tmux new -s default
-# fi
+

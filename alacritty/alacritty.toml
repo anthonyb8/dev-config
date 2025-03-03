@@ -1,5 +1,5 @@
 [general]
-import = ["~/.config/alacritty/themes/themes/gruvbox_dark.toml"]
+import = ["~/.config/alacritty/themes/themes/gruvbox_material_medium_dark.toml"]
 
 [env]
 TERM="ixterm-256color"
@@ -12,6 +12,7 @@ opacity = 0.95
 blur= true
 
 [font]
-normal.family="MesloLGS Nerd Font Mono"
+# normal.family="MesloLGS Nerd Font Mono"
 # normal.family="FireCode Nerd Font Mono"
-size = 12
+normal.family="Hack Nerd Font Mono"
+size = 10
