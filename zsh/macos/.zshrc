@@ -163,7 +163,7 @@ source /usr/local/share/powerlevel10k/powerlevel10k.zsh-theme
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 
-if [ -z "$TMUX" ]; then
-  /usr/local/bin/tmux
-fi
-
+# if [ -z "$TMUX" ]; then
+#   /usr/local/bin/tmux
+# fi
+#
