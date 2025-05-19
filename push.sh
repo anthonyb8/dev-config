@@ -6,7 +6,6 @@ CONFIG_FILES=(
 	"$HOME/.config/kitty"         # Kitty terminal config
 	"$HOME/.tmux.conf"            # Tmux config
 	"$HOME/.config/starship.toml" # Starship config
-	"$HOME/.config/alacritty/alacritty.toml"
 )
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -16,13 +15,15 @@ for file in "${CONFIG_FILES[@]}"; do
 	cp -r "$file" "$SCRIPT_DIR/"
 done
 
-cp -r "$HOME/.config/alacritty/alacritty.toml" "$SCRIPT_DIR/alacritty/"
+# cp -r "$HOME/.config/alacritty/alacritty.toml" "$SCRIPT_DIR/alacritty/"
 
 # .zshrc
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 	cp "$HOME/.zshrc" "$SCRIPT_DIR/zsh/linux/"
+	cp "$HOME/.config/alacritty/alacritty.toml" "$SCRIPT_DIR/alacritty/linux/"
 elif [[ "$OSTYPE" == "darwin"* ]]; then
 	cp "$HOME/.zshrc" "$SCRIPT_DIR/zsh/macos/"
+	cp "$HOME/.config/alacritty/alacritty.toml" "$SCRIPT_DIR/alacritty/macos/"
 fi
 
 # Add, commit, and push the changes to GitHub

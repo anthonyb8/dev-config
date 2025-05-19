@@ -143,3 +143,12 @@ export PATH="/home/anthony/.yarn/bin:$PATH"
 export PATH="/home/linuxbrew/.linuxbrew/opt/gnu-sed/bin:$PATH"
 
 
+export PATH="/usr/local/lib":$PATH
+export PATH="/home/linuxbrew/.linuxbrew/bin/python3.12:$PATH"
+alias python3="/home/linuxbrew/.linuxbrew/bin/python3.12"
+alias pip3="/home/linuxbrew/.linuxbrew/bin/pip3.12" 
+
+export PATH="$HOME/.config/midas/bin:$PATH"
+export PATH="$HOME/vcpkg":$PATH
+export CMAKE_TOOLCHAIN_FILE="$HOME/vcpkg/scripts/buildsystems/vcpkg.cmake"
+

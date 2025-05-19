@@ -5,10 +5,9 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Define the directories/files to restore
 CONFIG_FILES=(
-	"$SCRIPT_DIR/nvim"       # Example: Neovim config
-	"$SCRIPT_DIR/kitty"      # Example: Kitty terminal config
-	"$SCRIPT_DIR/.tmux.conf" # Example: Tmux config
-	"$SCRIPT_DIR/alacritty/alacritty.toml"
+	"$SCRIPT_DIR/nvim"          # Example: Neovim config
+	"$SCRIPT_DIR/kitty"         # Example: Kitty terminal config
+	"$SCRIPT_DIR/.tmux.conf"    # Example: Tmux config
 	"$SCRIPT_DIR/starship.toml" # Starship config
 )
 
@@ -17,7 +16,6 @@ TARGET_DIRS=(
 	"$HOME/.config/nvim"
 	"$HOME/.config/kitty"
 	"$HOME/.tmux.conf"
-	"$HOME/.config/alacritty/alacritty.toml"
 	"$HOME/.config/starship.toml"
 )
 
@@ -55,4 +53,13 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 	cp "$SCRIPT_DIR/zsh/linux/.zshrc" "$HOME/.zshrc"
 elif [[ "$OSTYPE" == "darwin"* ]]; then
 	cp "$SCRIPT_DIR/zsh/macos/.zshrc" "$HOME/.zshrc"
+fi
+
+# alacritty.toml
+mv "$HOME/.config/alacritty/alacritty.toml" "$HOME/.config/alacritty/alacritty.toml_bak"
+
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+	cp "$SCRIPT_DIR/alacritty/linux/alacritty.toml" "$HOME/.config/alacritty/alacritty.toml"
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+	cp "$SCRIPT_DIR/alacritty/macos/alacritty.toml" "$HOME/.config/alacritty/alacritty.toml"
 fi

@@ -7,13 +7,13 @@ TERM="xterm-256color"
 [window]
 padding.x = 0
 padding.y = 0
-decorations = "Buttonless"
-opacity = 0.70
+decorations = "None"
+opacity = 0.90
 blur= true
 
 [font]
 normal.family="Hack Nerd Font Mono"
-size = 14
+size = 12
 
 [cursor]
 style.shape="Block"
@@ -23,7 +23,7 @@ unfocused_hollow=true
 
 
 [terminal]
-shell = { program = "/usr/local/bin/tmux", args = ["new-session"] }
+shell = { program = "/home/linuxbrew/.linuxbrew/bin/tmux", args = ["new-session"] }
 
 
 
