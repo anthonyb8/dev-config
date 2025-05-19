@@ -66,6 +66,12 @@ return {
 				capabilities = capabilities,
 				on_attach = on_attach,
 			})
+			-- Swift
+			lspconfig.sourcekit.setup({
+				cmd = { "sourcekit-lsp" },
+				filetypes = { "swift", "objective-c", "objective-cpp" },
+				root_dir = lspconfig.util.root_pattern("Package.swift", ".git"),
+			})
 
 			-- C++
 			lspconfig.clangd.setup({
@@ -80,7 +86,7 @@ return {
 				root_dir = lspconfig.util.root_pattern("compile_commands.json", ".git"),
 				init_options = {
 					clangdFileStatus = true, -- Enable file status updates
-					fallbackFlags = { "-std=c++17" }, -- Fallback to C++17 if flags are missing
+					-- fallbackFlags = { "-std=c++17" }, -- Fallback to C++17 if flags are missing
 				},
 				flags = {
 					debounce_text_changes = 150, -- Avoid excessive diagnostics

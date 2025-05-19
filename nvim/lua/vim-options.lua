@@ -2,6 +2,12 @@
 vim.opt.undofile = true
 vim.opt.undodir = os.getenv("HOME") .. "/.local/share/nvim/undo"
 
+-- Removes tildes
+vim.opt.fillchars:append({ eob = " " })
+
+-- Push lualine down
+vim.o.cmdheight = 0
+
 -- Disable netrw if using another file explorer
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1

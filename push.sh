@@ -6,6 +6,7 @@ CONFIG_FILES=(
 	"$HOME/.config/kitty"         # Kitty terminal config
 	"$HOME/.tmux.conf"            # Tmux config
 	"$HOME/.config/starship.toml" # Starship config
+	"$HOME/.config/alacritty/alacritty.toml"
 )
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
