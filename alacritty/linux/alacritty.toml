@@ -9,7 +9,7 @@ padding.x = 0
 padding.y = 0
 decorations = "None"
 opacity = 0.90
-blur= true
+blur= false
 
 [font]
 normal.family="Hack Nerd Font Mono"
