@@ -8,8 +8,8 @@ TERM="xterm-256color"
 padding.x = 0
 padding.y = 0
 decorations = "None"
-opacity = 0.90
-blur= true
+opacity = 0.80
+blur= false
 
 [font]
 normal.family="Hack Nerd Font Mono"
