@@ -11,7 +11,7 @@ return {
 		require("neo-tree").setup({
 			close_if_last_window = false, -- Close Neo-tree if it's the last window
 			window = {
-				position = "left",
+				position = "float",
 				width = 30, -- Set the width of the Neo-tree window
 				mappings = {
 					["<CR>"] = "open", -- Open file

@@ -34,7 +34,7 @@ return {
 			local dap = require("dap")
 			dap.adapters.lldb = {
 				type = "executable",
-				command = "/usr/bin/lldb-vscode", -- Adjust the path if necessary
+				command = "/usr/local/opt/llvm/bin/lldb", -- macos(brew)y
 				name = "lldb",
 			}
 			dap.configurations.rust = {

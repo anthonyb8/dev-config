@@ -19,5 +19,12 @@ require("testingCmds")
 if vim.g.vscode then
 	require("lazy").setup("plugins")
 else
-	require("lazy").setup("plugins")
+	require("lazy").setup({
+		import = "plugins",
+	}, {
+		rocks = {
+			enabled = false, -- disable luarocks
+			hererocks = false,
+		},
+	})
 end

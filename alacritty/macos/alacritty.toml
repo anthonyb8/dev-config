@@ -10,6 +10,7 @@ padding.y = 0
 decorations = "None"
 opacity = 0.80
 blur= false
+dimensions = { columns=70, lines=25 }
 
 [font]
 normal.family="Hack Nerd Font Mono"
@@ -20,7 +21,6 @@ style.shape="Block"
 style.blinking="Always"
 thickness=1.0
 unfocused_hollow=true
-
 
 [terminal]
 shell = { program = "/usr/local/bin/tmux", args = ["new-session"] }
