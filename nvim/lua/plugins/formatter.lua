@@ -1,25 +1,28 @@
+local mason_bin = vim.fn.stdpath("data") .. "/mason/bin/"
+
 return {
 	"mhartington/formatter.nvim",
 	config = function()
 		require("formatter").setup({
 			logging = false,
 			filetype = {
-				python = {
-					-- Black formatter for Python
+				-- System Managed - Depreciated in Mason
+				rust = {
 					function()
 						return {
-							exe = "black", -- Ensure black is installed
-							args = { "--fast", "--line-length", "79", "-" },
+							exe = "rustfmt",
+							args = { "--edition=2021" },
 							stdin = true,
 						}
 					end,
 				},
-				rust = {
-					-- Rustfmt formatter for Rust
+				-- Mason managed
+				python = {
+					-- Black formatter for Python
 					function()
 						return {
-							exe = "rustfmt", -- Ensure rustfmt is installed
-							args = { "--edition=2021" },
+							exe = mason_bin .. "black", -- Ensure black is installed
+							args = { "--fast", "--line-length", "79", "-" },
 							stdin = true,
 						}
 					end,
@@ -28,7 +31,7 @@ return {
 					-- Clang format for C++
 					function()
 						return {
-							exe = "clang-format", -- Ensure clang-format is installed
+							exe = mason_bin .. "clang-format", -- Ensure clang-format is installed
 							args = { "--style=Google" },
 							stdin = true,
 						}
@@ -38,7 +41,7 @@ return {
 					-- Clang format for C++
 					function()
 						return {
-							exe = "clang-format", -- Ensure clang-format is installed
+							exe = mason_bin .. "clang-format", -- Ensure clang-format is installed
 							args = { "--style=Google" },
 							stdin = true,
 						}
@@ -48,7 +51,7 @@ return {
 					-- Stylua formatter for Lua
 					function()
 						return {
-							exe = "stylua", -- Ensure Stylua is installed
+							exe = mason_bin .. "stylua", -- Ensure Stylua is installed
 							args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0), "-" },
 							stdin = true,
 						}
@@ -59,7 +62,7 @@ return {
 					-- HTMLBeautify formatter for HTML
 					function()
 						return {
-							exe = "htmlbeautify",
+							exe = mason_bin .. "htmlbeautifier",
 							args = { "--indent-size", "2" },
 							stdin = true,
 						}
@@ -69,8 +72,8 @@ return {
 					-- Bash
 					function()
 						return {
-							exe = "shfmt",
-							rgs = { "-i", "2" }, -- Example: indent with 2 spaces
+							exe = mason_bin .. "shfmt",
+							args = { "-i", "2" }, -- Example: indent with 2 spaces
 							stdin = true,
 						}
 					end,
@@ -79,7 +82,7 @@ return {
 					-- JSON configuration using Prettier
 					function()
 						return {
-							exe = "prettier",
+							exe = mason_bin .. "prettier",
 							args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0), "--single-quote" },
 							stdin = true,
 						}
@@ -89,7 +92,7 @@ return {
 					-- md
 					function()
 						return {
-							exe = "prettier",
+							exe = mason_bin .. "prettier",
 							args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0) },
 							stdin = true,
 						}
@@ -99,7 +102,7 @@ return {
 					-- Js
 					function()
 						return {
-							exe = "prettier",
+							exe = mason_bin .. "prettier",
 							args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0) },
 							stdin = true,
 						}
@@ -109,7 +112,7 @@ return {
 					-- Jsx
 					function()
 						return {
-							exe = "prettier",
+							exe = mason_bin .. "prettier",
 							args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0) },
 							stdin = true,
 						}
@@ -118,7 +121,7 @@ return {
 				typescript = {
 					function()
 						return {
-							exe = "prettier",
+							exe = mason_bin .. "prettier",
 							args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0) },
 							stdin = true,
 						}
@@ -127,7 +130,7 @@ return {
 				typescriptreact = {
 					function()
 						return {
-							exe = "prettier",
+							exe = mason_bin .. "prettier",
 							args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0) },
 							stdin = true,
 						}

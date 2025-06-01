@@ -3,62 +3,96 @@ return {
 		"nvim-lualine/lualine.nvim",
 		event = "VeryLazy",
 		config = function()
+			local lint = require("lint")
+			local formatter = require("formatter.config")
+
 			-- Function to show LSP clients in brackets
 			local function lsp_client_names()
 				local clients = vim.lsp.get_clients()
 				if next(clients) == nil then
 					return "No LSP"
 				end
-				local client_names = {}
+
+				local names = {}
 				for _, client in ipairs(clients) do
-					table.insert(client_names, client.name)
+					table.insert(names, client.name)
 				end
-				return "" .. table.concat(client_names, ", ") .. ""
+				return table.concat(names, ", ")
+				-- return "" .. table.concat(client_names, ", ") .. ""
 			end
 
 			-- Function to show the active Python virtual environment name
 			local function venv_name()
 				local venv = vim.env.VIRTUAL_ENV
-				if venv then
-					return "[" .. vim.fn.fnamemodify(venv, ":t") .. "]" -- Get only the env name (folder name)
-				else
-					return "" -- Return empty if no venv is active
+				if not venv then
+					return ""
 				end
+				return "[" .. vim.fn.fnamemodify(venv, ":t") .. "]"
 			end
 
-			-- Function to show active linters for the current filetype using nvim-lint
+			-- Show active linters for current filetype or "No Linters"
 			local function linter_names()
 				local ft = vim.bo.filetype
-				local linters = require("lint").linters_by_ft[ft] or {}
-				if #linters > 0 then
-					return "" .. table.concat(linters, ", ") .. "" -- Show linters in square brackets
-				else
+				local linters = lint.linters_by_ft[ft] or {}
+				if #linters == 0 then
 					return "No Linters"
 				end
+				return table.concat(linters, ", ")
 			end
 
-			-- Function to show active formatter for the current filetype using formatter.nvim
+			-- Show first active formatter executable or "No Formatter"
 			local function formatter_name()
 				local ft = vim.bo.filetype
 				local formatter_config = require("formatter.config").values.filetype[ft]
 
 				if formatter_config and #formatter_config > 0 then
-					-- Extract the executable name of the first active formatter
 					local active_formatter = formatter_config[1]()
 					if active_formatter.exe then
-						return "" .. active_formatter.exe .. "" -- Show the formatter executable in square brackets
+						-- Extract just the executable name, no full path
+						return vim.fn.fnamemodify(active_formatter.exe, ":t")
 					end
 				end
 				return "No Formatter"
 			end
 
-			local function status_info()
-				local lsp_info = lsp_client_names()
-				local linter_info = linter_names()
-				local formatter_info = formatter_name()
+			-- -- Function to show active linters for the current filetype using nvim-lint
+			-- local function linter_names()
+			-- 	local ft = vim.bo.filetype
+			-- 	local linters = require("lint").linters_by_ft[ft] or {}
+			-- 	if #linters > 0 then
+			-- 		return "" .. table.concat(linters, ", ") .. "" -- Show linters in square brackets
+			-- 	else
+			-- 		return "No Linters"
+			-- 	end
+			-- end
+			--
+			-- -- Function to show active formatter for the current filetype using formatter.nvim
+			-- local function formatter_name()
+			-- 	local ft = vim.bo.filetype
+			-- 	local formatter_config = require("formatter.config").values.filetype[ft]
+			--
+			-- 	if formatter_config and #formatter_config > 0 then
+			-- 		-- Extract the executable name of the first active formatter
+			-- 		local active_formatter = formatter_config[1]()
+			-- 		if active_formatter.exe then
+			-- 			return "" .. active_formatter.exe .. "" -- Show the formatter executable in square brackets
+			-- 		end
+			-- 	end
+			-- 	return "No Formatter"
+			-- end
 
-				return "[" .. lsp_info .. ", " .. linter_info .. ", " .. formatter_info .. "]"
+			-- Combined status for LSP, Linters, Formatter
+			local function status_info()
+				return "[" .. lsp_client_names() .. ", " .. linter_names() .. ", " .. formatter_name() .. "]"
 			end
+
+			-- local function status_info()
+			-- 	local lsp_info = lsp_client_names()
+			-- 	local linter_info = linter_names()
+			-- 	local formatter_info = formatter_name()
+			--
+			-- 	return "[" .. lsp_info .. ", " .. linter_info .. ", " .. formatter_info .. "]"
+			-- end
 
 			require("lualine").setup({
 				options = {
@@ -75,7 +109,7 @@ return {
 						"branch",
 						{ "diff", colored = true, symbols = { added = " ", modified = "~", removed = " " } },
 						venv_name,
-					}, -- Custom diff symbols
+					},
 					lualine_c = { { "filename", path = 1 } }, -- Empty to avoid showing filename here
 					lualine_x = { "diagnostics", status_info, "filetype" },
 					lualine_y = { "progress" },

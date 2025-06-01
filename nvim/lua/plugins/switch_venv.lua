@@ -1,3 +1,4 @@
+-- doesnt work on macos
 return {
 	{
 		"linux-cultist/venv-selector.nvim",

@@ -24,15 +24,20 @@ return {
 			vim.api.nvim_set_hl(0, "TelescopePreviewNormal", { bg = "none" })
 			vim.api.nvim_set_hl(0, "TelescopePreviewBorder", { bg = "none" })
 
+			-- Terminal specific
+			vim.api.nvim_set_hl(0, "Terminal", { bg = "none" })
+			vim.api.nvim_set_hl(0, "TermCursor", { bg = "none" })
+			vim.api.nvim_set_hl(0, "TermCursorNC", { bg = "none" })
+
 			-- Make signcolumn background transparent so it blends nicely with terminal bg
 			vim.api.nvim_set_hl(0, "SignColumn", { bg = "none" })
 
-			vim.opt.guicursor = {
-				"n-v-c:ver25",
-				"i-ci-ve:ver25",
-				"r-cr:ver25",
-				"o:ver25",
-			}
+			-- vim.opt.guicursor = {
+			-- 	"n-v-c:ver25",
+			-- 	"i-ci-ve:ver25",
+			-- 	"r-cr:ver25",
+			-- 	"o:ver25",
+			-- }
 		end,
 	},
 }

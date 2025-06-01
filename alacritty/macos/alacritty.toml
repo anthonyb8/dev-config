@@ -8,8 +8,8 @@ TERM="xterm-256color"
 padding.x = 0
 padding.y = 0
 decorations = "None"
-opacity = 0.80
-blur= false
+opacity = 0.5 
+blur= true
 dimensions = { columns=70, lines=25 }
 
 [font]
@@ -18,9 +18,12 @@ size = 14
 
 [cursor]
 style.shape="Block"
-style.blinking="Always"
+style.blinking="Never"
 thickness=1.0
 unfocused_hollow=true
+
+[colors]
+cursor= { text = "#181818", cursor = "#8e8e8e" }
 
 [terminal]
 shell = { program = "/usr/local/bin/tmux", args = ["new-session"] }

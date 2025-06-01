@@ -4,7 +4,6 @@ return {
 		version = "*", -- Use the latest stable version
 		config = function()
 			require("toggleterm").setup({
-				size = 4, -- Size of the floating terminal
 				open_mapping = [[<C-t>]], -- Map Ctrl + t to open terminal
 				hide_numbers = true, -- Hide line numbers in terminal
 				shade_filetypes = {},
@@ -14,11 +13,17 @@ return {
 				insert_mappings = true, -- Apply insert mode mappings
 				terminal_mappings = true, -- Apply terminal mode mappings
 				persist_size = true, -- Preserve the size of the terminal
-				direction = "float", -- Make the terminal float
 				close_on_exit = true, -- Close terminal window when process exits
-				shell = "zsh", -- Use the default shell
+				shell = vim.o.shell, -- Use the default shell
+				shell_cmd = { vim.o.shell, "-l" },
+				direction = "horizontal", -- Make the terminal float
+				-- doesn't matter if direction is "float"
+				size = 10,
+				-- only matters if direction ="float"
 				float_opts = {
-					border = "curved", -- Border style for the floating window
+					border = "curved",
+					width = 80,
+					height = 20,
 					winblend = 0,
 				},
 			})

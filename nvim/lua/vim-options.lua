@@ -98,8 +98,8 @@ vim.api.nvim_set_keymap("n", "<C-u>", "<C-u>zz", { noremap = true, silent = true
 
 -- Window Management Keybindings
 vim.api.nvim_set_keymap("n", "Q", "<nop>", { noremap = true, silent = true }) -- Disable Ex mode
-vim.api.nvim_set_keymap("v", "-", ":m '<-2<CR>gv=gv", { noremap = true, silent = true }) -- Move selected line(s) up
-vim.api.nvim_set_keymap("v", "=", ":m '>+1<CR>gv=gv", { noremap = true, silent = true }) -- Move selected line(s) down
+vim.keymap.set("v", "-", ":move '<-2<CR>gv-gv", { noremap = true, silent = true }) -- Move selected line(s) up
+vim.keymap.set("v", "=", ":move '>+1<CR>gv-gv", { noremap = true, silent = true }) -- Move selected line(s) down
 vim.api.nvim_set_keymap("i", "<C-c>", "<Esc>", { noremap = true, silent = true }) -- Escape in insert mode
 vim.api.nvim_set_keymap("v", "<Tab>", ">gv", { noremap = true, silent = true }) -- Indent selected block
 vim.api.nvim_set_keymap("v", "<S-Tab>", "<gv", { noremap = true, silent = true }) -- Un-indent selected block

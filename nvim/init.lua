@@ -13,18 +13,11 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("vim-options")
-require("testingCmds")
+-- require("testingCmds")
 
 -- platform specfic --
 if vim.g.vscode then
 	require("lazy").setup("plugins")
 else
-	require("lazy").setup({
-		import = "plugins",
-	}, {
-		rocks = {
-			enabled = false, -- disable luarocks
-			hererocks = false,
-		},
-	})
+	require("lazy").setup("plugins")
 end

@@ -3,7 +3,6 @@ return {
 	"nvim-neo-tree/neo-tree.nvim",
 	branch = "v2.x", -- Ensure you are on the correct branch
 	cmd = "Neotree", -- Load Neo-tree when the 'Neotree' command is executed
-
 	dependencies = { "nvim-lua/plenary.nvim", "kyazdani42/nvim-web-devicons", "MunifTanjim/nui.nvim" },
 	config = function()
 		vim.o.splitright = true
@@ -41,7 +40,7 @@ return {
 					hide_gitignored = false, -- Hide Git ignored files
 					hide_by_name = {
 						"node_modules", -- Hide node_modules folder
-						".git",
+						-- ".git",
 					},
 					never_show = {
 						".DS_Store", -- Never show .DS_Store files

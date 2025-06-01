@@ -12,11 +12,11 @@ return {
 				defaults = {
 					layout_strategy = "horizontal",
 					layout_config = {
-						height = 0.8, -- Adjust the height of the results window
-						width = 0.8, -- Adjust the width of the results window
-						preview_cutoff = 120, -- Maximum number of characters to display in the preview column
+						height = 0.8,
+						width = 0.8,
+						preview_cutoff = 120,
 						horizontal = {
-							preview_width = 0.5, -- Adjust the width of the preview column
+							preview_width = 0.5,
 						},
 					},
 					results_title = false,
@@ -32,12 +32,6 @@ return {
 							["<C-p>"] = actions.move_selection_previous,
 						},
 					},
-				},
-				pickers = {
-					-- Default configuration for builtin pickers goes here:
-				},
-				extensions = {
-					-- Your extension configuration goes here:
 				},
 			})
 		end,

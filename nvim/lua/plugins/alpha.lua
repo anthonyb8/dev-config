@@ -1,32 +1,41 @@
 return {
-  "goolord/alpha-nvim",
-  dependencies = {
-    "nvim-tree/nvim-web-devicons",
-  },
+	"goolord/alpha-nvim",
+	dependencies = {
+		"nvim-tree/nvim-web-devicons",
+	},
 
-  config = function()
-    local alpha = require("alpha")
-    local dashboard = require("alpha.themes.startify")
+	config = function()
+		local alpha = require("alpha")
+		local dashboard = require("alpha.themes.theta")
 
+		dashboard.header.val = {
+			[[                                                                       ]],
+			[[                                                                       ]],
+			[[                                                                       ]],
+			[[                                                                       ]],
+			[[                                                                     ]],
+			[[       ████ ██████           █████      ██                     ]],
+			[[      ███████████             █████                             ]],
+			[[      █████████ ███████████████████ ███   ███████████   ]],
+			[[     █████████  ███    █████████████ █████ ██████████████   ]],
+			[[    █████████ ██████████ █████████ █████ █████ ████ █████   ]],
+			[[  ███████████ ███    ███ █████████ █████ █████ ████ █████  ]],
+			[[ ██████  █████████████████████ ████ █████ █████ ████ ██████ ]],
+			[[                                                                       ]],
+			[[                                                                       ]],
+			[[                                                                       ]],
+		}
 
-    dashboard.section.header.val = {
-      [[                                                                       ]],
-      [[                                                                       ]],
-      [[                                                                       ]],
-      [[                                                                       ]],
-      [[                                                                     ]],
-      [[       ████ ██████           █████      ██                     ]],
-      [[      ███████████             █████                             ]],
-      [[      █████████ ███████████████████ ███   ███████████   ]],
-      [[     █████████  ███    █████████████ █████ ██████████████   ]],
-      [[    █████████ ██████████ █████████ █████ █████ ████ █████   ]],
-      [[  ███████████ ███    ███ █████████ █████ █████ ████ █████  ]],
-      [[ ██████  █████████████████████ ████ █████ █████ ████ ██████ ]],
-      [[                                                                       ]],
-      [[                                                                       ]],
-      [[                                                                       ]],
-    }
+		-- Pick a random highlight group from a list of colors
+		local highlights = { "String", "Identifier", "Keyword", "Function" }
+		local random_hl = highlights[math.random(#highlights)]
 
-    alpha.setup(dashboard.config)
-  end,
+		-- Set highlight
+		dashboard.header.opts = {
+			hl = random_hl,
+			position = "center",
+		}
+
+		alpha.setup(dashboard.config)
+	end,
 }
