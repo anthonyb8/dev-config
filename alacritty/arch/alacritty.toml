@@ -1,0 +1,31 @@
+[general]
+import = ["~/.config/alacritty/themes/themes/gruvbox_material_medium_dark.toml"]
+
+[env]
+TERM="xterm-256color"
+
+[window]
+dimensions.columns=60 
+dimensions.lines=20
+padding.x = 0
+padding.y = 0
+decorations = "None"
+opacity = 0.70
+blur= false
+
+[font]
+normal.family="Hack Nerd Font Mono"
+size = 10
+
+[cursor]
+style.shape="Block"
+style.blinking="Always"
+thickness=1.0
+unfocused_hollow=true
+
+
+[terminal]
+shell = { program ="/usr/bin/tmux",  args = ["new-session"] }
+
+
+
