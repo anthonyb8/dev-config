@@ -1,8 +1,10 @@
 return {
 	-- Mason UI for for managing external tools
+	-- https://github.com/mason-org/mason.nvim
 	{ "williamboman/mason.nvim", lazy = false, config = true },
 
 	-- Bridges Mason with lspconfig; disables auto-setup so you can configure manually
+	-- https://github.com/mason-org/mason-lspconfig.nvim
 	{
 		"williamboman/mason-lspconfig.nvim",
 		lazy = false,
@@ -15,7 +17,11 @@ return {
 		end,
 	},
 
+	-- https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim
+	{ "WhoIsSethDaniel/mason-tool-installer.nvim" },
+
 	-- Core LSP client config, with completion capabilities injected via cmp-nvim-lsp
+	-- https://github.com/neovim/nvim-lspconfig
 	{
 		"neovim/nvim-lspconfig",
 		lazy = false,
@@ -39,9 +45,9 @@ return {
 			end
 
 			local servers = {
-				ts_ls = {},
 				solargraph = {},
 				html = {},
+				cssls = {},
 				lua_ls = {},
 				bashls = {},
 				marksman = {},
@@ -50,23 +56,37 @@ return {
 					filetypes = { "swift", "objective-c", "objective-cpp" },
 					root_dir = lspconfig.util.root_pattern("Package.swift", ".git"),
 				},
+
+				-- Javascript/Typescript
+				ts_ls = {},
+
+				-- Java
+				-- jdtls = {},
+
+				-- C/C++
 				clangd = {
 					cmd = {
-						vim.fn.stdpath("data") .. "/mason/bin/clangd",
+						"clangd",
 						"--background-index",
-						"--clang-tidy=false",
+						"--clang-tidy",
+						"--clang-tidy-checks=google-*",
 						"--log=verbose",
+						-- "--clang-tidy",
 					},
 					root_dir = lspconfig.util.root_pattern("compile_commands.json", ".git"),
 					init_options = { clangdFileStatus = true },
 					flags = { debounce_text_changes = 150 },
 				},
+
+				-- Python
 				pyright = {
 					on_attach = function(client, bufnr)
 						client.server_capabilities.documentFormattingProvider = false
 						on_attach(client, bufnr)
 					end,
 				},
+
+				-- Rust
 				rust_analyzer = {
 					settings = {
 						["rust-analyzer"] = {

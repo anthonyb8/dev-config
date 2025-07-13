@@ -16,14 +16,14 @@ return {
 				close_on_exit = true, -- Close terminal window when process exits
 				shell = vim.o.shell, -- Use the default shell
 				shell_cmd = { vim.o.shell, "-l" },
-				direction = "horizontal", -- Make the terminal float
+				direction = "float", -- Make the terminal float
 				-- doesn't matter if direction is "float"
 				size = 10,
 				-- only matters if direction ="float"
 				float_opts = {
 					border = "curved",
-					width = 80,
-					height = 20,
+					width = 100,
+					height = 40,
 					winblend = 0,
 				},
 			})

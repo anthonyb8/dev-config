@@ -258,6 +258,9 @@ return {
 			{ "<leader>mp", ":MarkdownPreview<CR>", desc = "Start Markdown Preview", mode = "n" },
 			{ "<leader>ms", ":MarkdownPreviewStop<CR>", desc = "Stop Markdown Preview", mode = "n" },
 
+			-- Doxygen Comment
+			{ "<leader>o", ":Dox<CR>", desc = "Doxygen Block", mode = "n" },
+
 			-- Telescope-related key mappings under <leader>f
 			{ "<leader>f", group = "Files" },
 			{

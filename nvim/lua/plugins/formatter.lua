@@ -16,13 +16,12 @@ return {
 						}
 					end,
 				},
-				-- Mason managed
-				python = {
-					-- Black formatter for Python
+				c = {
+					-- Clang format for C++
 					function()
 						return {
-							exe = mason_bin .. "black", -- Ensure black is installed
-							args = { "--fast", "--line-length", "79", "-" },
+							exe = "clang-format", -- Ensure clang-format is installed
+							args = { "--style=Google" },
 							stdin = true,
 						}
 					end,
@@ -31,7 +30,7 @@ return {
 					-- Clang format for C++
 					function()
 						return {
-							exe = mason_bin .. "clang-format", -- Ensure clang-format is installed
+							exe = "clang-format", -- Ensure clang-format is installed
 							args = { "--style=Google" },
 							stdin = true,
 						}
@@ -41,8 +40,29 @@ return {
 					-- Clang format for C++
 					function()
 						return {
-							exe = mason_bin .. "clang-format", -- Ensure clang-format is installed
+							exe = "clang-format", -- Ensure clang-format is installed
 							args = { "--style=Google" },
+							stdin = true,
+						}
+					end,
+				},
+				hpp = {
+					-- Clang format for C++
+					function()
+						return {
+							exe = "clang-format", -- Ensure clang-format is installed
+							args = { "--style=Google" },
+							stdin = true,
+						}
+					end,
+				},
+				-- Mason managed
+				python = {
+					-- Black formatter for Python
+					function()
+						return {
+							exe = mason_bin .. "black", -- Ensure black is installed
+							args = { "--fast", "--line-length", "79", "-" },
 							stdin = true,
 						}
 					end,
@@ -136,6 +156,16 @@ return {
 						}
 					end,
 				},
+				css = {
+					-- Jsx
+					function()
+						return {
+							exe = mason_bin .. "prettier",
+							args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0) },
+							stdin = true,
+						}
+					end,
+				},
 			},
 		})
 
@@ -145,8 +175,9 @@ return {
 			pattern = {
 				"*.py",
 				"*.rs",
-				"*.cpp",
+				"*.c",
 				"*.h",
+				"*.cpp",
 				"*.hpp",
 				"*.sh",
 				"*.json",
@@ -156,6 +187,7 @@ return {
 				"*.ts",
 				"*.tsx",
 				"*.md",
+				"*.css",
 			},
 			command = "FormatWrite",
 			group = "FormatAutogroup",

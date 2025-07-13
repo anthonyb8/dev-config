@@ -70,13 +70,20 @@ export CXX="/usr/local/opt/llvm/bin/clang++"
 export PATH="$HOME/vcpkg:$PATH"
 export CMAKE_TOOLCHAIN_FILE="$HOME/vcpkg/scripts/buildsystems/vcpkg.cmake"
 
+# Java
+# export JAVA_HOME=$(/usr/libexec/java_home -v 13)
+# export PATH="/usr/local/opt/openjdk/bin:$PATH"
+# export JAVA_HOME=$(/usr/libexec/java_home -v 24)
+# export PATH="/usr/local/opt/openjdk/bin:$PATH"
+# export JAVA_HOME=$(/usr/libexec/java_home -v 24)
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/temurin-24.jdk/Contents/Home
+export PATH="$JAVA_HOME/bin:$PATH"
+
 # Kitty
 KITTY_OS="macos"
 
-export JAVA_HOME=$(/usr/libexec/java_home -v 13)
-source /usr/local/share/powerlevel10k/powerlevel10k.zsh-theme
-
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+source /usr/local/share/powerlevel10k/powerlevel10k.zsh-theme
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
