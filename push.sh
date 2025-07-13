@@ -15,8 +15,8 @@ os() {
 
 # Define the directories/files to back up
 CONFIG_FILES=(
-  # "$HOME/.config/nvim" # Neovim config
-  # "$HOME/.tmux.conf" # Tmux config
+  "$HOME/.config/nvim" # Neovim config
+  "$HOME/.tmux.conf"   # Tmux config
   # "$HOME/.config/starship.toml" # Starship config
   # "$HOME/.config/kitty"         # Kitty terminal config
 )

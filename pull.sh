@@ -13,6 +13,10 @@ os() {
   fi
 }
 
+# Define the GitHub repo directory
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+OS=$(os)
+
 # Define the directories/files to restore
 CONFIG_FILES=(
   "$SCRIPT_DIR/nvim"
@@ -24,11 +28,8 @@ TARGET_DIRS=(
   "$HOME/.config/nvim"
   "$HOME/.tmux.conf"
 )
-# Define the GitHub repo directory
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-OS=$(os)
 
-git pull
+#git pull
 echo "$OS"
 
 # Restore the configuration files by movi# Restore the configuration files with backups
@@ -48,9 +49,11 @@ for i in "${!CONFIG_FILES[@]}"; do
   if [[ -d "${CONFIG_FILES[i]}" ]]; then
     # If source is a directory, copy the directory
     cp -r "${CONFIG_FILES[i]}" "${TARGET_DIRS[i]}"
+    echo "Copied ${CONFIG_FILES[i]} ${TARGET_DIRS[i]}"
   elif [[ -f "${CONFIG_FILES[i]}" ]]; then
     # If source is a file, copy the file
     cp "${CONFIG_FILES[i]}" "${TARGET_DIRS[i]}"
+    echo "Copied ${CONFIG_FILES[i]} ${TARGET_DIRS[i]}"
   fi
 done
 
