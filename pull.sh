@@ -75,12 +75,6 @@ case "$OS" in
   ;;
 esac
 
-# if [[ "$OS" == "linux-gnu"* ]]; then
-#   cp "$SCRIPT_DIR/zsh/linux/.zshrc" "$HOME/.zshrc"
-# elif [[ "$OSTYPE" == "darwin"* ]]; then
-#   cp "$SCRIPT_DIR/zsh/macos/.zshrc" "$HOME/.zshrc"
-# fi
-
 # alacritty.toml
 mv "$HOME/.config/alacritty/alacritty.toml" "$HOME/.config/alacritty/alacritty.toml_bak"
 
@@ -98,9 +92,3 @@ case "$OS" in
   echo "Invalid OS."
   ;;
 esac
-
-# if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-#   cp "$SCRIPT_DIR/alacritty/linux/alacritty.toml" "$HOME/.config/alacritty/alacritty.toml"
-# elif [[ "$OSTYPE" == "darwin"* ]]; then
-#   cp "$SCRIPT_DIR/alacritty/macos/alacritty.toml" "$HOME/.config/alacritty/alacritty.toml"
-# fi

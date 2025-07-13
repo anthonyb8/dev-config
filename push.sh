@@ -29,17 +29,6 @@ for file in "${CONFIG_FILES[@]}"; do
   cp -r "$file" "$SCRIPT_DIR/"
 done
 
-# cp -r "$HOME/.config/alacritty/alacritty.toml" "$SCRIPT_DIR/alacritty/"
-
-# .zshrc
-# if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-#   cp "$HOME/.zshrc" "$SCRIPT_DIR/zsh/linux/"
-#   cp "$HOME/.config/alacritty/alacritty.toml" "$SCRIPT_DIR/alacritty/linux/"
-# elif [[ "$OSTYPE" == "darwin"* ]]; then
-#   cp "$HOME/.zshrc" "$SCRIPT_DIR/zsh/macos/"
-#   cp "$HOME/.config/alacritty/alacritty.toml" "$SCRIPT_DIR/alacritty/macos/"
-# fi
-
 case "$OS" in
 "arch")
   cp "$HOME/.zshrc" "$SCRIPT_DIR/zsh/arch/"
