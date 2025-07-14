@@ -1,5 +1,5 @@
+-- Lazy load Neo-tree when the keymap is pressed
 return {
-	-- Lazy load Neo-tree when the keymap is pressed
 	"nvim-neo-tree/neo-tree.nvim",
 	branch = "v2.x", -- Ensure you are on the correct branch
 	cmd = "Neotree", -- Load Neo-tree when the 'Neotree' command is executed

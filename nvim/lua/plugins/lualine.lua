@@ -18,7 +18,6 @@ return {
 					table.insert(names, client.name)
 				end
 				return table.concat(names, ", ")
-				-- return "" .. table.concat(client_names, ", ") .. ""
 			end
 
 			-- Function to show the active Python virtual environment name
@@ -54,45 +53,10 @@ return {
 				end
 				return "No Formatter"
 			end
-
-			-- -- Function to show active linters for the current filetype using nvim-lint
-			-- local function linter_names()
-			-- 	local ft = vim.bo.filetype
-			-- 	local linters = require("lint").linters_by_ft[ft] or {}
-			-- 	if #linters > 0 then
-			-- 		return "" .. table.concat(linters, ", ") .. "" -- Show linters in square brackets
-			-- 	else
-			-- 		return "No Linters"
-			-- 	end
-			-- end
-			--
-			-- -- Function to show active formatter for the current filetype using formatter.nvim
-			-- local function formatter_name()
-			-- 	local ft = vim.bo.filetype
-			-- 	local formatter_config = require("formatter.config").values.filetype[ft]
-			--
-			-- 	if formatter_config and #formatter_config > 0 then
-			-- 		-- Extract the executable name of the first active formatter
-			-- 		local active_formatter = formatter_config[1]()
-			-- 		if active_formatter.exe then
-			-- 			return "" .. active_formatter.exe .. "" -- Show the formatter executable in square brackets
-			-- 		end
-			-- 	end
-			-- 	return "No Formatter"
-			-- end
-
 			-- Combined status for LSP, Linters, Formatter
 			local function status_info()
 				return "[" .. lsp_client_names() .. ", " .. linter_names() .. ", " .. formatter_name() .. "]"
 			end
-
-			-- local function status_info()
-			-- 	local lsp_info = lsp_client_names()
-			-- 	local linter_info = linter_names()
-			-- 	local formatter_info = formatter_name()
-			--
-			-- 	return "[" .. lsp_info .. ", " .. linter_info .. ", " .. formatter_info .. "]"
-			-- end
 
 			require("lualine").setup({
 				options = {

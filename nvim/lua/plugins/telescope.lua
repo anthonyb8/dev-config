@@ -1,5 +1,5 @@
+-- Lazy load Telescope when a keymap is pressed
 return {
-	-- Lazy load Telescope when a keymap is pressed
 	{
 		"nvim-telescope/telescope.nvim",
 		cmd = "Telescope", -- Load Telescope when the 'Telescope' command is run

@@ -13,16 +13,6 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 
--- require("vim-options")
--- -- require("testingCmds")
---
--- -- platform specfic --
--- if vim.g.vscode then
--- 	require("lazy").setup("plugins")
--- else
--- 	require("lazy").setup("plugins")
--- end
-
 -- This has to be set before initializing lazy
 vim.g.mapleader = " "
 

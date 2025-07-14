@@ -31,13 +31,6 @@ return {
 
 			-- Make signcolumn background transparent so it blends nicely with terminal bg
 			vim.api.nvim_set_hl(0, "SignColumn", { bg = "none" })
-
-			-- vim.opt.guicursor = {
-			-- 	"n-v-c:ver25",
-			-- 	"i-ci-ve:ver25",
-			-- 	"r-cr:ver25",
-			-- 	"o:ver25",
-			-- }
 		end,
 	},
 }

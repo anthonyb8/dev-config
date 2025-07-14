@@ -1,3 +1,4 @@
+-- May need to set up separately
 return {
 	-- http://github.com/mfussenegger/nvim-jdtls
 	"mfussenegger/nvim-jdtls",

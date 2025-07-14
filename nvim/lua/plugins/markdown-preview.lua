@@ -1,5 +1,5 @@
+-- Markdown Preview Plugin
 return {
-	-- Markdown Preview Plugin
 	{
 		"iamcco/markdown-preview.nvim",
 		cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
