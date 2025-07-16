@@ -76,7 +76,10 @@ export CMAKE_TOOLCHAIN_FILE="$HOME/vcpkg/scripts/buildsystems/vcpkg.cmake"
 # export JAVA_HOME=$(/usr/libexec/java_home -v 24)
 # export PATH="/usr/local/opt/openjdk/bin:$PATH"
 # export JAVA_HOME=$(/usr/libexec/java_home -v 24)
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/temurin-24.jdk/Contents/Home
+# export JAVA_HOME=/Library/Java/JavaVirtualMachines/temurin-24.jdk/Contents/Home
+# export PATH="$JAVA_HOME/bin:$PATH"
+export JAVA_HOME=$(/usr/libexec/java_home -v 21)
+export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk-21.jdk/Contents/Home"
 export PATH="$JAVA_HOME/bin:$PATH"
 
 # Kitty

@@ -10,8 +10,8 @@ return {
 		require("neo-tree").setup({
 			close_if_last_window = false, -- Close Neo-tree if it's the last window
 			window = {
-				position = "float",
-				width = 30, -- Set the width of the Neo-tree window
+				position = "left", -- open as a sidebar on the left( "float for middle")
+				width = 30, --  control sidebar width
 				mappings = {
 					["<CR>"] = "open", -- Open file
 					["o"] = "open", -- Open file
