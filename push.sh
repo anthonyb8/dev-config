@@ -24,6 +24,8 @@ CONFIG_FILES=(
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 OS=$(os)
 
+echo $OS
+
 # Copy the configuration files to the GitHub repository directory
 for file in "${CONFIG_FILES[@]}"; do
   cp -r "$file" "$SCRIPT_DIR/"

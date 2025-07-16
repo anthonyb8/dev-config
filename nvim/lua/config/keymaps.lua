@@ -50,3 +50,5 @@ vim.api.nvim_set_keymap("n", "<C-w><S-Left>", "<C-w>H", { noremap = true, silent
 vim.api.nvim_set_keymap("n", "<C-w><S-Right>", "<C-w>L", { noremap = true, silent = true }) -- Swap window to right
 vim.api.nvim_set_keymap("n", "<C-w><S-Up>", "<C-w>K", { noremap = true, silent = true }) -- Swap window to top
 vim.api.nvim_set_keymap("n", "<C-w><S-Down>", "<C-w>J", { noremap = true, silent = true }) -- Swap window to bottom
+
+vim.api.nvim_set_keymap("n", "<leader>rr", "<cmd>lua vim.lsp.buf.rename()<CR>", { noremap = true, silent = true })

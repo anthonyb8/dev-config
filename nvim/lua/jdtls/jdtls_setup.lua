@@ -33,6 +33,23 @@ function M.setup()
 	-- Final config path
 	local config_path = jdtls_path .. "/" .. config_os
 
+	-- 🔑 Inline on_attach and capabilities
+	local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+	local on_attach = function(client, bufnr)
+		local opts = { noremap = true, silent = true, buffer = bufnr }
+		vim.keymap.set("n", "gd", function()
+			vim.cmd("vsplit")
+			vim.lsp.buf.definition()
+		end, opts)
+		vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+		vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+		vim.keymap.set("n", "ga", vim.lsp.buf.code_action, opts)
+		vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+		vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, opts)
+		vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, opts)
+	end
+
 	local config = {
 		-- The command that starts the language server
 		-- See: https://github.com/eclipse/eclipse.jdt.ls#running-from-the-command-line
@@ -67,6 +84,8 @@ function M.setup()
 		-- One dedicated LSP server & client will be started per unique root_dir
 		root_dir = require("jdtls.setup").find_root({ ".git", "mvnw", "gradlew", "src" }),
 
+		root_dir = vim.fs.dirname(vim.fs.find({ "gradlew", ".git", "mvnw", "pom.xml" }, { upward = true })[1]),
+
 		-- Here you can configure eclipse.jdt.ls specific settings
 		-- See https://github.com/eclipse/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request
 		-- for a list of options
@@ -84,6 +103,8 @@ function M.setup()
 		init_options = {
 			bundles = {},
 		},
+		on_attach = on_attach,
+		capabilities = capabilities,
 	}
 	-- This starts a new client & server,
 	-- or attaches to an existing client & server depending on the `root_dir`.

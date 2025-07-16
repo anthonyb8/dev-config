@@ -22,6 +22,9 @@ return {
 		"williamboman/mason-lspconfig.nvim",
 		lazy = false,
 		opts = {
+			ensure_installed = {
+				"jdtls",
+			},
 			automatic_installation = true,
 			automatic_setup = false,
 			automatic_enable = false, -- added to stop mutiple servers from starting
@@ -46,6 +49,8 @@ return {
 			})
 		end,
 	},
+
+	-- Java LSP
 	{ "mfussenegger/nvim-jdtls" },
 
 	-- Core LSP client config, with completion capabilities injected via cmp-nvim-lsp
