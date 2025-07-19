@@ -37,7 +37,7 @@ case "$OS" in
   cp "$HOME/.config/alacritty/alacritty.toml" "$SCRIPT_DIR/alacritty/arch/"
   ;;
 "debian")
-  cp "$HOME/.zshrc" "$SCRIPT_DIR/zsh/linux/"
+  cp "$HOME/.zshrc" "$SCRIPT_DIR/zsh/debian/"
   cp "$HOME/.config/alacritty/alacritty.toml" "$SCRIPT_DIR/alacritty/debian/"
   ;;
 "darwin")
