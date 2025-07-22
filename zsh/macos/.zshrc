@@ -43,12 +43,12 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # Load NVM bash_completion
 
 # PostgreSQL 15 binaries and libraries
-export PATH="/usr/local/opt/postgresql@15/bin:$PATH"
-export LDFLAGS="-L/usr/local/opt/postgresql@15/lib"
-export CPPFLAGS="-I/usr/local/opt/postgresql@15/include"
-export PKG_CONFIG_PATH="/usr/local/opt/postgresql@15/lib/pkgconfig"
-export DYLD_LIBRARY_PATH="/usr/local/opt/postgresql@15/lib:$DYLD_LIBRARY_PATH"
-export PG_HOME="/usr/local/opt/postgresql@15"
+# export PATH="/usr/local/opt/postgresql@15/bin:$PATH"
+# export LDFLAGS="-L/usr/local/opt/postgresql@15/lib"
+# export CPPFLAGS="-I/usr/local/opt/postgresql@15/include"
+# export PKG_CONFIG_PATH="/usr/local/opt/postgresql@15/lib/pkgconfig"
+# export DYLD_LIBRARY_PATH="/usr/local/opt/postgresql@15/lib:$DYLD_LIBRARY_PATH"
+# export PG_HOME="/usr/local/opt/postgresql@15"
 
 # Environment variables for PyO3 (Python-Rust bindings)
 export LIBRARY_PATH="/usr/local/opt/openssl/lib:/usr/local/opt/llvm/lib:/usr/local/opt/python@3.12/lib"
@@ -95,3 +95,6 @@ export PATH="$HOME/.forge/bin:$PATH"
 export MACOSX_DEPLOYMENT_TARGET=13.0
 export PATH="$HOME/.config/midas/bin:$PATH"
 
+# MySQL
+export PATH="/usr/local/opt/mysql@8.4/bin:$PATH"
+export PATH="/usr/local/opt/postgresql@16/bin:$PATH"
