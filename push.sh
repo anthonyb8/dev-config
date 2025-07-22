@@ -7,8 +7,6 @@ if [ "$1" == "-y" ]; then
   AUTO_YES=true
 fi
 
-echo "$AUTO_YES"
-
 os() {
   if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     if [[ -f /etc/os-release ]]; then
@@ -32,8 +30,6 @@ CONFIG_FILES=(
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 OS=$(os)
-
-# echo $OS
 
 # Copy the configuration files to the GitHub repository directory
 for file in "${CONFIG_FILES[@]}"; do
@@ -66,7 +62,6 @@ push() {
 
 # Add, commit, and push the changes to GitHub
 if [ "$AUTO_YES" == true ]; then
-  echo "Auto"
   push
 else
   read -rp "Do you want to push to GitHub? [y/N]" answer
@@ -74,11 +69,7 @@ else
     echo "Skipping GitHub push"
     exit 0
   else
-    echo "Yest"
     push
-    # git add .
-    # git commit -m "Update configuration files"
-    # git push origin main
   fi
 
 fi
