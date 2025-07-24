@@ -120,7 +120,13 @@ export NVM_DIR="$HOME/.config/nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # Java
-export JAVA_HOME="/usr/lib/jvm/java-24-openjdk"
+export JAVA_HOME="/usr/lib/jvm/java-21-openjdk"
 export PATH="$JAVA_HOME/bin:$PATH"
 
+# Python
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"  # only if you use pyenv-virtualenv
 
+export PATH="$HOME/.passlock/bin:$PATH"

@@ -166,6 +166,15 @@ return {
 						}
 					end,
 				},
+				xml = {
+					function()
+						return {
+							exe = "xmllint",
+							args = { "--format", "-" },
+							stdin = true,
+						}
+					end,
+				},
 			},
 		})
 
@@ -188,6 +197,7 @@ return {
 				"*.tsx",
 				"*.md",
 				"*.css",
+				"*.xml",
 			},
 			command = "FormatWrite",
 			group = "FormatAutogroup",
