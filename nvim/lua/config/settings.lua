@@ -46,10 +46,21 @@ vim.cmd([[autocmd CursorHold * lua ShowDiagnosticsHover()]])
 vim.api.nvim_set_keymap("n", "<leader>e", "<cmd>lua ShowDiagnosticsHover()<CR>", { noremap = true, silent = true })
 
 -- Diagnostic signs with hollow/outline symbols
-vim.fn.sign_define("DiagnosticSignError", { text = "", texthl = "DiagnosticSignError" }) -- Hollow/outline error
-vim.fn.sign_define("DiagnosticSignWarn", { text = "", texthl = "DiagnosticSignWarn" }) -- Hollow/outline warning
-vim.fn.sign_define("DiagnosticSignInfo", { text = "", texthl = "DiagnosticSignInfo" }) -- Hollow/outline info
-vim.fn.sign_define("DiagnosticSignHint", { text = "", texthl = "DiagnosticSignHint" }) -- Hollow/outline hint (lightbulb)
+vim.diagnostic.config({
+	signs = {
+		text = {
+			[vim.diagnostic.severity.ERROR] = "",
+			[vim.diagnostic.severity.WARN] = "",
+			[vim.diagnostic.severity.INFO] = "",
+			[vim.diagnostic.severity.HINT] = "",
+		},
+	},
+})
+
+-- vim.fn.sign_define("DiagnosticSignError", { text = "", texthl = "DiagnosticSignError" }) -- Hollow/outline error
+-- vim.fn.sign_define("DiagnosticSignWarn", { text = "", texthl = "DiagnosticSignWarn" }) -- Hollow/outline warning
+-- vim.fn.sign_define("DiagnosticSignInfo", { text = "", texthl = "DiagnosticSignInfo" }) -- Hollow/outline info
+-- vim.fn.sign_define("DiagnosticSignHint", { text = "", texthl = "DiagnosticSignHint" }) -- Hollow/outline hint (lightbulb)
 
 -- clang-format for C/C++
 vim.cmd([[autocmd FileType cpp,c,h setlocal formatprg=clang-format\ --style=Google]])

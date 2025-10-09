@@ -60,7 +60,7 @@ return {
 		lazy = false,
 		dependencies = { "hrsh7th/cmp-nvim-lsp" },
 		config = function()
-			local lspconfig = require("lspconfig")
+			-- local lspconfig = require("lspconfig")
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 			local on_attach = function(client, bufnr)
@@ -87,7 +87,7 @@ return {
 				sourcekit = {
 					cmd = { "sourcekit-lsp" },
 					filetypes = { "swift", "objective-c", "objective-cpp" },
-					root_dir = lspconfig.util.root_pattern("Package.swift", ".git"),
+					root_dir = vim.fs.root(0, { "Package.swift", ".git" }),
 				},
 
 				-- Javascript/Typescript
@@ -103,7 +103,7 @@ return {
 						"--log=verbose",
 						-- "--clang-tidy",
 					},
-					root_dir = lspconfig.util.root_pattern("compile_commands.json", ".git"),
+					root_dir = vim.fs.root(0, { "compile_commands.json", ".git" }),
 					init_options = { clangdFileStatus = true },
 					flags = { debounce_text_changes = 150 },
 				},
@@ -144,10 +144,11 @@ return {
 				},
 			}
 
-			for name, config in pairs(servers) do
+			for server, config in pairs(servers) do
 				config.capabilities = capabilities
-				config.on_attach = config.on_attach or on_attach
-				lspconfig[name].setup(config)
+				config.on_attach = on_attach
+				vim.lsp.config(server, config)
+				vim.lsp.enable(server)
 			end
 
 			-- Rust-specific error workaround
