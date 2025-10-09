@@ -132,3 +132,7 @@ eval "$(pyenv virtualenv-init -)"  # only if you use pyenv-virtualenv
 
 export PATH="$HOME/.passlock/bin:$PATH"
 export PATH="$HOME/.forge/bin:$PATH"
+
+export NVM_DIR="$HOME/.config/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
