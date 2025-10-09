@@ -1,3 +1,5 @@
+-- ***** reuires java 21 or higher *****
+
 local M = {}
 
 -- function M:setup()
@@ -12,7 +14,8 @@ function M.setup()
 	--Dynamic variables
 	local java_exec = os.getenv("JAVA_HOME") and (os.getenv("JAVA_HOME") .. "/bin/java") or "java" -- fallback if JAVA_HOME not set
 	local jdtls_path = vim.fn.stdpath("data") .. "/mason/packages/jdtls"
-	local launcher_jar = vim.fn.glob(jdtls_path .. "/plugins/org.eclipse.equinox.launcher_1.7.0.v20250331-1702.jar")
+	-- local launcher_jar = vim.fn.glob(jdtls_path .. "/plugins/org.eclipse.equinox.launcher_1.7.0.v20250331-1702.jar")
+	local launcher_jar = vim.fn.glob(jdtls_path .. "/plugins/org.eclipse.equinox.launcher_*.jar")
 
 	-- local jdtls_path = vim.fn.stdpath("data") .. "/mason/packages/jdtls"
 
