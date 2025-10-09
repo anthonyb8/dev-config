@@ -124,3 +124,11 @@ export PATH=$JAVA_HOME/bin:$PATH
 export EDITOR=nvim
 export VISUAL=nvim
 
+# Python
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"  # only if you use pyenv-virtualenv
+
+export PATH="$HOME/.passlock/bin:$PATH"
+export PATH="$HOME/.forge/bin:$PATH"
