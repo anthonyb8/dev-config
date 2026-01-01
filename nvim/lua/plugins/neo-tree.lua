@@ -1,14 +1,30 @@
 -- Lazy load Neo-tree when the keymap is pressed
 return {
 	"nvim-neo-tree/neo-tree.nvim",
-	branch = "v2.x", -- Ensure you are on the correct branch
 	cmd = "Neotree", -- Load Neo-tree when the 'Neotree' command is executed
-	dependencies = { "nvim-lua/plenary.nvim", "kyazdani42/nvim-web-devicons", "MunifTanjim/nui.nvim" },
+	dependencies = { "nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons", "MunifTanjim/nui.nvim" },
 	config = function()
 		vim.o.splitright = true
 
 		require("neo-tree").setup({
 			close_if_last_window = false, -- Close Neo-tree if it's the last window
+			default_component_configs = {
+				diagnostics = {
+					symbols = {
+						hint = "󰌶",
+						info = "󰋽",
+						warn = "󰀪",
+						error = "󰅚",
+					},
+					highlights = {
+						hint = "DiagnosticSignHint",
+						info = "DiagnosticSignInfo",
+						warn = "DiagnosticSignWarn",
+						error = "DiagnosticSignError",
+					},
+				},
+				git_status = { enabled = false },
+			},
 			window = {
 				position = "left", -- open as a sidebar on the left( "float for middle")
 				width = 30, --  control sidebar width
@@ -48,12 +64,6 @@ return {
 						-- "__pycache__",
 						".git",
 					},
-				},
-			},
-			git_status = {
-				enable = false,
-				window = {
-					position = "float", -- Position Git status window as a float
 				},
 			},
 		})

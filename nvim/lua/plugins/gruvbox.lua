@@ -32,10 +32,10 @@ return {
 			vim.api.nvim_set_hl(0, "TermCursor", { bg = "none" })
 			vim.api.nvim_set_hl(0, "TermCursorNC", { bg = "none" })
 
-			-- -- Neo-tree transparency / background override
-			-- vim.api.nvim_set_hl(0, "NeoTreeNormal", { bg = "none" })
-			-- vim.api.nvim_set_hl(0, "NeoTreeNormalNC", { bg = "none" })
-			-- vim.api.nvim_set_hl(0, "NeoTreeEndOfBuffer", { bg = "none" })
+			-- CursorLine
+			vim.api.nvim_set_hl(0, "CursorLine", { bg = "#7c6f64" }) -- slightly lighter for selection
+			vim.api.nvim_set_hl(0, "LineNr", { fg = "#7c6f64" })
+			vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "#A89984", bold = true })
 
 			-- Match Neo-tree colors to Gruvbox Material
 			vim.api.nvim_set_hl(0, "NeoTreeNormal", { bg = "#32302f" }) -- Gruvbox Bg0 / Fg1

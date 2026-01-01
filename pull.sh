@@ -66,33 +66,22 @@ update() {
 
   # .zshrc
   mv "$HOME/.zshrc" "$HOME/.zshrc_bak"
-
-  case "$OS" in
-  "arch")
-    cp "$SCRIPT_DIR/zsh/arch/.zshrc" "$HOME/.zshrc"
-    ;;
-  "debian")
-    cp "$SCRIPT_DIR/zsh/debian/.zshrc" "$HOME/.zshrc"
-    ;;
-  "darwin")
-    cp "$SCRIPT_DIR/zsh/macos/.zshrc" "$HOME/.zshrc"
-    ;;
-  *)
-    echo "Invalid OS."
-    ;;
-  esac
-
-  # alacritty.toml
   mv "$HOME/.config/alacritty/alacritty.toml" "$HOME/.config/alacritty/alacritty.toml_bak"
 
   case "$OS" in
   "arch")
+    cp "$SCRIPT_DIR/zsh/arch/.zshrc" "$HOME/.zshrc"
     cp "$SCRIPT_DIR/alacritty/arch/alacritty.toml" "$HOME/.config/alacritty/alacritty.toml"
+
+    mv "$HOME/.config/rofi/config.rasi" "$HOME/.config/rofi/config.rasi_bak"
+    cp "$SCRIPT_DIR/rofi/" "$HOME/.config/rofi/config.rasi"
     ;;
   "debian")
+    cp "$SCRIPT_DIR/zsh/debian/.zshrc" "$HOME/.zshrc"
     cp "$SCRIPT_DIR/alacritty/debian/alacritty.toml" "$HOME/.config/alacritty/alacritty.toml"
     ;;
   "darwin")
+    cp "$SCRIPT_DIR/zsh/macos/.zshrc" "$HOME/.zshrc"
     cp "$SCRIPT_DIR/alacritty/macos/alacritty.toml" "$HOME/.config/alacritty/alacritty.toml"
     ;;
   *)

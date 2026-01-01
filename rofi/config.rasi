@@ -1,0 +1,112 @@
+configuration {
+  modes: [ combi ];
+  combi-modes: [ window, drun, run ];
+  matching: "fuzzy";
+  sort: true;
+  sorting-method: "fzf";
+  case-sensitive: false;
+  normalize-match: true;
+}
+
+@theme "gruvbox-dark-soft"
+
+window {
+  background-color: "#32302f"; 
+  border: none;
+  border-radius: 20px;
+  padding: 10px;
+}
+
+overlay, mainbox {
+  background-color: transparent; 
+}
+
+inputbar {
+  background-color: transparent; 
+}
+
+box {
+  background-color: transparent; 
+}
+
+case-indicator{
+  background-color: transparent; 
+}
+
+prompt {
+  enabled: false;
+  width: 0;
+  padding: 0;
+  margin: 0;
+}
+
+textbox-current-entry {
+  background-color: transparent; 
+}
+
+icon-current-entry {
+  background-color: transparent; 
+}
+
+entry {
+  background-color: transparent; 
+  placeholder: "SEARCH";
+  hide-cursor-on-empty: true;
+  placeholder-color: grey; 
+}
+
+num-rows {
+  background-color: transparent; 
+}
+
+num-filter-rows {
+  background-color: transparent; 
+}
+
+listview {
+  background-color: transparent; 
+}
+
+scrollbar {
+  background-color: transparent; 
+}
+
+element {
+ background-color: rgba(30, 30, 30, 0.2);
+  orientation: horizontal;
+  children: [ element-text, element-icon ];
+  spacing: 50px;
+}
+
+element-icon {
+  background-color: transparent; 
+  size: 1em;
+}
+
+element-text {
+  background-color: transparent; 
+}
+
+mode-switcher {
+  background-color: transparent; 
+}
+
+message {
+  background-color: transparent; 
+}
+
+element.normal.normal {
+  background-color: transparent; 
+}
+
+element.alternate.normal {
+  background-color: transparent; 
+}
+
+textbox-prompt-sep {
+    expand:     false;
+    str:        "";
+    text-color: @normal-foreground;
+    background-color: transparent;
+    margin:     0;
+}

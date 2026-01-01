@@ -24,8 +24,6 @@ os() {
 CONFIG_FILES=(
   "$HOME/.config/nvim" # Neovim config
   "$HOME/.tmux.conf"   # Tmux config
-  # "$HOME/.config/starship.toml" # Starship config
-  # "$HOME/.config/kitty"         # Kitty terminal config
 )
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -40,6 +38,7 @@ case "$OS" in
 "arch")
   cp "$HOME/.zshrc" "$SCRIPT_DIR/zsh/arch/"
   cp "$HOME/.config/alacritty/alacritty.toml" "$SCRIPT_DIR/alacritty/arch/"
+  cp "$HOME/.config/rofi/config.rasi" "$SCRIPT_DIR/rofi/"
   ;;
 "debian")
   cp "$HOME/.zshrc" "$SCRIPT_DIR/zsh/debian/"
