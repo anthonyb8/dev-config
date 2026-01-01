@@ -74,7 +74,7 @@ update() {
     cp "$SCRIPT_DIR/alacritty/arch/alacritty.toml" "$HOME/.config/alacritty/alacritty.toml"
 
     mv "$HOME/.config/rofi/config.rasi" "$HOME/.config/rofi/config.rasi_bak"
-    cp "$SCRIPT_DIR/rofi/" "$HOME/.config/rofi/config.rasi"
+    cp "$SCRIPT_DIR/rofi/config.rasi" "$HOME/.config/rofi/config.rasi"
     ;;
   "debian")
     cp "$SCRIPT_DIR/zsh/debian/.zshrc" "$HOME/.zshrc"
