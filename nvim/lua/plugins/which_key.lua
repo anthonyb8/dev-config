@@ -77,6 +77,27 @@ return {
 				mode = "n",
 			},
 
+			-- Dap
+			-- Debug mappings
+			{ "<leader>x", group = "Debug" },
+			{ "<leader>xb", "<cmd>lua require('dap').toggle_breakpoint()<CR>", desc = "Toggle Breakpoint" },
+			{
+				"<leader>xB",
+				"<cmd>lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>",
+				desc = "Conditional Breakpoint",
+			},
+			{ "<leader>xc", "<cmd>lua require('dap').continue()<CR>", desc = "Continue" },
+			{ "<leader>xi", "<cmd>lua require('dap').step_into()<CR>", desc = "Step Into" },
+			{ "<leader>xo", "<cmd>lua require('dap').step_over()<CR>", desc = "Step Over" },
+			{ "<leader>xO", "<cmd>lua require('dap').step_out()<CR>", desc = "Step Out" },
+			{ "<leader>xu", "<cmd>lua require('dapui').toggle()<CR>", desc = "Toggle UI" },
+			{ "<leader>xr", "<cmd>lua require('dap').repl.open()<CR>", desc = "Open REPL" },
+			{ "<leader>xl", "<cmd>lua require('dap').run_last()<CR>", desc = "Run Last" },
+			{ "<F5>", "<cmd>lua require('dap').continue()<CR>", desc = "Debug: Continue" },
+			{ "<F10>", "<cmd>lua require('dap').step_over()<CR>", desc = "Debug: Step Over" },
+			{ "<F11>", "<cmd>lua require('dap').step_into()<CR>", desc = "Debug: Step Into" },
+			{ "<F12>", "<cmd>lua require('dap').step_out()<CR>", desc = "Debug: Step Out" },
+
 			-- CMake
 			{ "<leader>m", group = "CMake" }, -- group
 			{
@@ -135,6 +156,14 @@ return {
 				"<leader>bq",
 				":BufferKill<CR>",
 				desc = "Kill buffer",
+				mode = "n",
+			},
+
+			-- Flutter {"<leader>r", group = "Run"}
+			{
+				"<leader>rf",
+				":FlutterRun",
+				desc = "Run Flutter",
 				mode = "n",
 			},
 

@@ -6,7 +6,7 @@ return {
 		require("formatter").setup({
 			logging = false,
 			filetype = {
-				-- System Managed - Depreciated in Mason
+				-- System Managed - NOT MASON
 				rust = {
 					function()
 						return {
@@ -17,40 +17,36 @@ return {
 					end,
 				},
 				c = {
-					-- Clang format for C++
 					function()
 						return {
-							exe = "clang-format", -- Ensure clang-format is installed
+							exe = "clang-format",
 							args = { "--style=Google" },
 							stdin = true,
 						}
 					end,
 				},
 				cpp = {
-					-- Clang format for C++
 					function()
 						return {
-							exe = "clang-format", -- Ensure clang-format is installed
+							exe = "clang-format",
 							args = { "--style=Google" },
 							stdin = true,
 						}
 					end,
 				},
 				h = {
-					-- Clang format for C++
 					function()
 						return {
-							exe = "clang-format", -- Ensure clang-format is installed
+							exe = "clang-format",
 							args = { "--style=Google" },
 							stdin = true,
 						}
 					end,
 				},
 				hpp = {
-					-- Clang format for C++
 					function()
 						return {
-							exe = "clang-format", -- Ensure clang-format is installed
+							exe = "clang-format",
 							args = { "--style=Google" },
 							stdin = true,
 						}
@@ -175,6 +171,25 @@ return {
 						}
 					end,
 				},
+				-- Dart / Flutter
+				dart = {
+					function()
+						return {
+							exe = "dart",
+							args = { "format" },
+							stdin = true,
+						}
+					end,
+				},
+				caddyfile = {
+					function()
+						return {
+							exe = "caddy", -- or full path if needed
+							args = { "fmt", "-" }, -- reads stdin, writes to stdout
+							stdin = true,
+						}
+					end,
+				},
 			},
 		})
 
@@ -198,6 +213,9 @@ return {
 				"*.md",
 				"*.css",
 				"*.xml",
+				"*.dart",
+				"Caddyfile",
+				"*.caddy",
 			},
 			command = "FormatWrite",
 			group = "FormatAutogroup",

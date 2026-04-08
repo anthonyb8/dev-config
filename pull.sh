@@ -27,13 +27,15 @@ OS=$(os)
 # Define the directories/files to restore
 CONFIG_FILES=(
   "$SCRIPT_DIR/nvim"
-  "$SCRIPT_DIR/.tmux.conf"
+  "$SCRIPT_DIR/tmux/.tmux.conf"
+  "$SCRIPT_DIR/tmux/.tmux"
 )
 
 # Define where to move the configurations on the machine
 TARGET_DIRS=(
   "$HOME/.config/nvim"
   "$HOME/.tmux.conf"
+  "$HOME/.tmux"
 )
 
 git pull

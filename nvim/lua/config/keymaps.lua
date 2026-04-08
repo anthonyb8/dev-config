@@ -29,8 +29,8 @@ vim.api.nvim_set_keymap("n", "<C-j>", "<C-w>j", { noremap = true, silent = true 
 vim.api.nvim_set_keymap("n", "<C-k>", "<C-w>k", { noremap = true, silent = true })
 
 -- ToggleTerm Keybindings (Normal and Insert modes)
-vim.api.nvim_set_keymap("n", "<C-t>", ":ToggleTerm direction=float<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("i", "<C-t>", "<Esc>:ToggleTerm direction=float<CR>", { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap("n", "<C-t>", ":ToggleTerm<CR>", { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap("i", "<C-t>", "<Esc>:ToggleTerm", { noremap = true, silent = true })
 
 -- Save and Scroll Keybindings
 vim.api.nvim_set_keymap("n", "<C-s>", ":w<CR>", { noremap = true, silent = true }) -- Save file

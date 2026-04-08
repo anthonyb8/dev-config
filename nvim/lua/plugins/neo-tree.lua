@@ -26,7 +26,7 @@ return {
 				git_status = { enabled = false },
 			},
 			window = {
-				position = "left", -- open as a sidebar on the left( "float for middle")
+				position = "float", -- open as a sidebar on the left( "float for middle")
 				width = 30, --  control sidebar width
 				mappings = {
 					["<CR>"] = "open", -- Open file

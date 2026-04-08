@@ -24,6 +24,15 @@ require("lazy").setup("plugins", {
 	},
 })
 
+vim.filetype.add({
+	filename = {
+		["Caddyfile"] = "caddyfile", -- maps literal file name
+	},
+	extension = {
+		caddy = "caddyfile", -- optional for *.caddy files
+	},
+})
+
 -- require("config.lazy")
 
 -- These modules are not loaded by lazy

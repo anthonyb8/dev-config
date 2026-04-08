@@ -6,7 +6,7 @@ return {
 			-- Setup nvim-treesitter
 			local config = require("nvim-treesitter.configs")
 			config.setup({
-				ensure_installed = { "python", "lua", "rust", "cpp", "c", "javascript", "typescript" }, -- Add other languages you need
+				ensure_installed = { "python", "lua", "rust", "cpp", "c", "javascript", "typescript", "caddy" }, -- Add other languages you need
 				auto_install = true,
 				highlight = {
 					enable = true, -- Enable Treesitter-based highlighting

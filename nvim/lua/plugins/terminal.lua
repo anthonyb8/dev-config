@@ -1,3 +1,4 @@
+-- return {}
 return {
 	{
 		"akinsho/toggleterm.nvim",

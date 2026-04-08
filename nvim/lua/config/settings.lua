@@ -75,6 +75,59 @@ vim.api.nvim_create_user_command("ClearLspLog", function()
 	end
 end, {})
 
+--Tabs
+-- Use builtin tabline
+-- Always override the tabline
+vim.opt.tabline = "%!v:lua._tabline()"
+
+_G._tabline = function()
+	local s = ""
+	local terminal_exists = false
+
+	-- first pass: check if any terminal exists
+	for i = 1, vim.fn.tabpagenr("$") do
+		local winnr = vim.fn.tabpagewinnr(i)
+		local bufnr = vim.fn.tabpagebuflist(i)[winnr]
+		if vim.bo[bufnr].buftype == "terminal" then
+			terminal_exists = true
+			break
+		end
+	end
+
+	-- if no terminal, hide tabline
+	if not terminal_exists then
+		return ""
+	end
+
+	-- otherwise, render all tabs
+	for i = 1, vim.fn.tabpagenr("$") do
+		local winnr = vim.fn.tabpagewinnr(i)
+		local bufnr = vim.fn.tabpagebuflist(i)[winnr]
+		local name = vim.fn.bufname(bufnr)
+
+		-- terminal gets special label
+		if vim.bo[bufnr].buftype == "terminal" then
+			name = " Terminal"
+		else
+			name = vim.fn.fnamemodify(name, ":t")
+			if name == "" then
+				name = "[No Name]"
+			end
+		end
+
+		-- highlight current tab
+		if i == vim.fn.tabpagenr() then
+			s = s .. "%#TabLineSel#"
+		else
+			s = s .. "%#TabLine#"
+		end
+
+		s = s .. " " .. i .. ": " .. name .. " "
+	end
+
+	s = s .. "%#TabLineFill#"
+	return s
+end
 -- -- jdtls : java lsp
 -- vim.api.nvim_create_autocmd("FileType", {
 -- 	pattern = "java",

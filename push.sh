@@ -20,19 +20,12 @@ os() {
   fi
 }
 
-# Define the directories/files to back up
-CONFIG_FILES=(
-  "$HOME/.config/nvim" # Neovim config
-  "$HOME/.tmux.conf"   # Tmux config
-)
-
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 OS=$(os)
 
-# Copy the configuration files to the GitHub repository directory
-for file in "${CONFIG_FILES[@]}"; do
-  cp -r "$file" "$SCRIPT_DIR/"
-done
+cp -r "$HOME/.config/nvim" "$SCRIPT_DIR/"
+cp "$HOME/.tmux.conf" "$SCRIPT_DIR/tmux/"
+rsync -a --exclude='plugins/' "$HOME/.tmux/" "$SCRIPT_DIR/tmux/.tmux/"
 
 case "$OS" in
 "arch")

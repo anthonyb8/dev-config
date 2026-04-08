@@ -75,7 +75,18 @@ return {
 						{ "diff", colored = true, symbols = { added = " ", modified = "~", removed = " " } },
 						venv_name,
 					},
-					lualine_c = { { "filename", path = 1 } }, -- Empty to avoid showing filename here
+					lualine_c = {
+						{
+							"filename",
+							path = 1,
+							fmt = function(name)
+								if vim.bo.buftype == "terminal" then
+									return "Terminal"
+								end
+								return name
+							end,
+						},
+					},
 					lualine_x = { "diagnostics", status_info, "filetype" },
 					lualine_y = { "progress" },
 					lualine_z = { "location" },

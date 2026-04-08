@@ -1,0 +1,17 @@
+PREFIX = Ctrl+Space
+
+SESSIONS ─────────────────┬─ WINDOWS ─────────────────
+ prefix + s   switch      │  prefix + c    new
+ prefix + $   rename      │  prefix + ,    rename
+ prefix + d   detach      │  prefix + w    picker
+ prefix + n   new         │  prefix + 0-9  jump
+                          ├─ SIDEBAR ─────────────────
+PANES ────────────────────┤  prefix + t    toggle
+ prefix + \   split vert  │
+ prefix + '   split horiz ├─ MISC ────────────────────
+ prefix + x   kill        │  prefix + p    popup
+ prefix + z   scrollback  │  prefix + r    reload cfg
+ Alt + hjkl   navigate    │  prefix + h    this menu
+ prefix + C + hjkl resize │
+──────────────────────────┴───────────────────────────
+                 q to close
