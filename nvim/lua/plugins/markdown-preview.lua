@@ -9,4 +9,9 @@ return {
 		end,
 		ft = { "markdown" },
 	},
+	{
+		"MeanderingProgrammer/render-markdown.nvim",
+		ft = { "markdown" },
+		opts = {},
+	},
 }

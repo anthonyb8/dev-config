@@ -93,6 +93,15 @@ return {
 				-- Javascript/Typescript
 				ts_ls = {},
 
+				harper_ls = {
+					filetypes = { "markdown", "txt", "text" },
+					settings = {
+						["harper-ls"] = {
+							userDictPath = "~/.config/nvim/spell/dict.txt",
+						},
+					},
+				},
+
 				-- C/C++
 				clangd = {
 					cmd = {
@@ -129,6 +138,12 @@ return {
 									enable = "never",
 									useParameterNames = false,
 								},
+								cargo = {
+									targetDir = true,
+								},
+								-- procMacro = {
+								-- 	enable = true, -- keep on, but now isolated
+								-- },
 								maxLength = 25,
 								parameterHints = { enable = true },
 								reborrowHints = { enable = "never" },

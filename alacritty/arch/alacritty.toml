@@ -10,8 +10,8 @@ dimensions.lines=20
 padding.x = 0
 padding.y = 0
 decorations = "None"
-opacity = 0.70
-blur= false
+opacity = 0.90
+blur=true
 
 [font]
 normal.family="Hack Nerd Font Mono"

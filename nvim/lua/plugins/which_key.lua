@@ -167,6 +167,13 @@ return {
 				mode = "n",
 			},
 
+			{ "<leader>rr", "<cmd>lua vim.lsp.buf.rename()<CR>", desc = "LSP Rename Symbol" },
+			{
+				"<leader>rp",
+				"<cmd>lua require('spectre').open_visual({select_word=true})<CR>",
+				desc = "Replace String Project Wide",
+			},
+
 			-- Quickfix-related key mappings under <leader>c
 			{ "<leader>c", group = "Quickfix" },
 			{

@@ -7,7 +7,7 @@ return {
 			local config = require("nvim-treesitter.configs")
 			config.setup({
 				ensure_installed = { "python", "lua", "rust", "cpp", "c", "javascript", "typescript", "caddy" }, -- Add other languages you need
-				auto_install = true,
+				auto_install = false,
 				highlight = {
 					enable = true, -- Enable Treesitter-based highlighting
 					additional_vim_regex_highlighting = false, -- Disable built-in Vim regex highlighting

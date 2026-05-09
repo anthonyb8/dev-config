@@ -190,6 +190,15 @@ return {
 						}
 					end,
 				},
+				swift = {
+					function()
+						return {
+							exe = "swiftformat",
+							args = { "--stdinpath", vim.api.nvim_buf_get_name(0) },
+							stdin = true,
+						}
+					end,
+				},
 			},
 		})
 
@@ -216,6 +225,7 @@ return {
 				"*.dart",
 				"Caddyfile",
 				"*.caddy",
+				"*.swift",
 			},
 			command = "FormatWrite",
 			group = "FormatAutogroup",
