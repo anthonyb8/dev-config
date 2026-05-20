@@ -10,7 +10,7 @@ dimensions.lines=20
 padding.x = 0
 padding.y = 0
 decorations = "None"
-opacity = 0.90
+opacity = 0.70
 blur=true
 
 [font]

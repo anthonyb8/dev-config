@@ -32,6 +32,8 @@ case "$OS" in
   cp "$HOME/.zshrc" "$SCRIPT_DIR/zsh/arch/"
   cp "$HOME/.config/alacritty/alacritty.toml" "$SCRIPT_DIR/alacritty/arch/"
   cp "$HOME/.config/rofi/config.rasi" "$SCRIPT_DIR/rofi/"
+  cp "$HOME/.config/mpd/mpd.conf" "$SCRIPT_DIR/mpd/"
+  cp "$HOME/.config/rmpc/config.ron" "$SCRIPT_DIR/rmpc/"
   ;;
 "debian")
   cp "$HOME/.zshrc" "$SCRIPT_DIR/zsh/debian/"
