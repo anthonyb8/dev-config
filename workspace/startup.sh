@@ -11,10 +11,10 @@ sleep 3
 wmctrl -r "Alacritty" -t 1
 wmctrl -r "Alacritty" -b add,maximized_vert,maximized_horz
 
-thunar &
+slack &
 sleep 3
-wmctrl -r "Thunar" -t 2
-wmctrl -r "Thunar" -b add,maximized_vert,maximized_horz
+wmctrl -r "Slack" -t 2
+wmctrl -r "Slack" -b add,maximized_vert,maximized_horz
 
 alacritty --title "rmpc" -e rmpc &
 sleep 3

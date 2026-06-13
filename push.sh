@@ -34,6 +34,7 @@ case "$OS" in
   cp "$HOME/.config/rofi/config.rasi" "$SCRIPT_DIR/rofi/"
   cp "$HOME/.config/mpd/mpd.conf" "$SCRIPT_DIR/mpd/"
   cp "$HOME/.config/rmpc/config.ron" "$SCRIPT_DIR/rmpc/"
+  cp "$HOME/.config/rmpc/config.ron" "$SCRIPT_DIR/rmpc/"
   cp "$HOME/.config/xfce4/startup.sh" "$SCRIPT_DIR/workspace/"
   ;;
 "debian")

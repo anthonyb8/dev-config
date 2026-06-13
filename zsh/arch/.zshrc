@@ -24,3 +24,6 @@ export VISUAL=nvim
 
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
 
+
+# Created by `pipx` on 2026-05-04 12:52:11
+# export PATH="$PATH:/home/anthony/.local/bin"

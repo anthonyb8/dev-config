@@ -49,15 +49,17 @@ return {
 			},
 			{
 				"<leader>/",
-				'<esc><cmd>lua require("Comment.api").toggle.linewise(vim.fn.visualmode())<CR>',
+				"gc",
 				desc = "Comment",
 				mode = "v",
+				remap = true,
 			},
 			{
 				"<leader>/",
-				"<cmd>lua require('Comment.api').toggle.linewise.current()<CR>",
+				"gcc",
 				desc = "Comment",
 				mode = "n",
+				remap = true,
 			},
 			{
 				"<leader>a",

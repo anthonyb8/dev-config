@@ -58,6 +58,10 @@ vim.diagnostic.config({
 })
 vim.opt.signcolumn = "auto"
 
+-- Spell complete
+-- vim.opt.spell = true
+-- vim.opt.spelllang = "en_us"
+
 -- clang-format for C/C++
 vim.cmd([[autocmd FileType cpp,c,h setlocal formatprg=clang-format\ --style=Google]])
 

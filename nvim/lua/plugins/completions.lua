@@ -1,4 +1,7 @@
 return {
+	-- {
+	-- 	"f3fora/cmp-spell",
+	-- },
 	-- Completion engine with snippet support
 	{
 		"hrsh7th/nvim-cmp",
@@ -7,6 +10,8 @@ return {
 			"saadparwaiz1/cmp_luasnip",
 			"rafamadriz/friendly-snippets",
 			"hrsh7th/cmp-nvim-lsp",
+
+			-- "f3fora/cmp-spell",
 		},
 		config = function()
 			local cmp = require("cmp")
@@ -22,6 +27,13 @@ return {
 					completion = cmp.config.window.bordered(),
 					documentation = cmp.config.window.bordered(),
 				},
+				-- sorting = {
+				-- 	comparators = {
+				-- 		cmp.config.compare.length,
+				-- 		cmp.config.compare.score,
+				-- 		cmp.config.compare.recently_used,
+				-- 	},
+				-- },
 				mapping = cmp.mapping.preset.insert({
 					["<C-b>"] = cmp.mapping.scroll_docs(-4),
 					["<C-f>"] = cmp.mapping.scroll_docs(4),
@@ -32,6 +44,7 @@ return {
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
 					{ name = "luasnip" },
+					-- { name = "spell", keyword_length = 4, max_item_count = 10 },
 				}, {
 					{ name = "buffer" },
 				}),

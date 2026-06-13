@@ -41,14 +41,14 @@ return {
 	-- https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim
 	{ "WhoIsSethDaniel/mason-tool-installer.nvim" },
 
-	{
-		"MysticalDevil/inlay-hints.nvim",
-		config = function()
-			require("inlay-hints").setup({
-				renderer = "inlay-hints",
-			})
-		end,
-	},
+	-- {
+	-- 	"MysticalDevil/inlay-hints.nvim",
+	-- 	config = function()
+	-- 		require("inlay-hints").setup({
+	-- 			renderer = "inlay-hints",
+	-- 		})
+	-- 	end,
+	-- },
 
 	-- Java LSP
 	{ "mfussenegger/nvim-jdtls" },
@@ -64,6 +64,10 @@ return {
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 			local on_attach = function(client, bufnr)
+				if client.supports_method("textDocument/inlayHint") then
+					vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+				end
+
 				local opts = { noremap = true, silent = true, buffer = bufnr }
 				vim.keymap.set("n", "gd", function()
 					vim.cmd("vsplit")
@@ -94,7 +98,7 @@ return {
 				ts_ls = {},
 
 				harper_ls = {
-					filetypes = { "markdown", "txt", "text" },
+					filetypes = { "txt", "text" }, -- "markdown"
 					settings = {
 						["harper-ls"] = {
 							userDictPath = "~/.config/nvim/spell/dict.txt",
