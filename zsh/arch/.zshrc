@@ -22,6 +22,9 @@ export PATH="$HOME/.secretz/bin:$PATH"
 export EDITOR=nvim
 export VISUAL=nvim
 
+# Tmux  
+DISABLE_AUTO_TITLE="true"
+
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
 
 
