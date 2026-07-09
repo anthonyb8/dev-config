@@ -95,7 +95,26 @@ return {
 				},
 
 				-- Javascript/Typescript
-				ts_ls = {},
+				-- tsgo = {
+				-- 	cmd_env = {
+				-- 		GOMAXPROCS = "2",
+				-- 	},
+				-- },
+				ts_ls = {
+					init_options = {
+						maxTsServerMemory = 4096, -- cap each instance at 4GB instead of unbounded
+						preferences = {
+							includePackageJsonAutoImports = "off", -- big win, stops scanning every dep for auto-import suggestions
+						},
+					},
+					settings = {
+						typescript = {
+							tsserver = {
+								maxTsServerMemory = 4096,
+							},
+						},
+					},
+				},
 
 				harper_ls = {
 					filetypes = { "txt", "text" }, -- "markdown"

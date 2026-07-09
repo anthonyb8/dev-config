@@ -5,7 +5,7 @@ return {
 		event = "VeryLazy",
 		config = function()
 			local lint = require("lint")
-			local formatter = require("formatter.config")
+			-- local formatter = require("formatter.config")
 
 			-- Function to show LSP clients in brackets
 			local function lsp_client_names()
@@ -41,19 +41,31 @@ return {
 			end
 
 			-- Show first active formatter executable or "No Formatter"
+			-- Show first active formatter for current buffer or "No Formatter"
 			local function formatter_name()
-				local ft = vim.bo.filetype
-				local formatter_config = require("formatter.config").values.filetype[ft]
-
-				if formatter_config and #formatter_config > 0 then
-					local active_formatter = formatter_config[1]()
-					if active_formatter.exe then
-						-- Extract just the executable name, no full path
-						return vim.fn.fnamemodify(active_formatter.exe, ":t")
-					end
+				local ok, conform = pcall(require, "conform")
+				if not ok then
+					return "No Formatter"
 				end
-				return "No Formatter"
+				local fts = conform.list_formatters(0)
+				if #fts == 0 then
+					return "No Formatter"
+				end
+				return fts[1].name
 			end
+			-- local function formatter_name()
+			-- 	local ft = vim.bo.filetype
+			-- 	local formatter_config = require("formatter.config").values.filetype[ft]
+			--
+			-- 	if formatter_config and #formatter_config > 0 then
+			-- 		local active_formatter = formatter_config[1]()
+			-- 		if active_formatter.exe then
+			-- 			-- Extract just the executable name, no full path
+			-- 			return vim.fn.fnamemodify(active_formatter.exe, ":t")
+			-- 		end
+			-- 	end
+			-- 	return "No Formatter"
+			-- end
 			-- Combined status for LSP, Linters, Formatter
 			local function status_info()
 				return "[" .. lsp_client_names() .. ", " .. linter_names() .. ", " .. formatter_name() .. "]"

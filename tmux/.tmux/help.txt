@@ -1,12 +1,12 @@
-PREFIX = Ctrl+Space
+PREFIX = Ctrl+Space                
 
 SESSIONS ─────────────────┬─ WINDOWS ─────────────────
- prefix + s   switch      │  prefix + c    new
- prefix + $   rename      │  prefix + ,    rename
- prefix + d   detach      │  prefix + w    picker
- prefix + n   new         │  prefix + 0-9  jump
-                          ├─ SIDEBAR ─────────────────
-PANES ────────────────────┤  prefix + t    toggle
+ prefix + s   switch      │  Alt + c       new
+ prefix + $   rename      │  Alt + r       rename
+ prefix + d   detach      │  Alt + x       kill
+ prefix + n   new         │  Alt + H / L   prev / next
+                          │  Alt + 1-9     jump
+PANES ────────────────────┤  prefix + w    picker
  prefix + \   split vert  │
  prefix + '   split horiz ├─ MISC ────────────────────
  prefix + x   kill        │  prefix + p    popup
