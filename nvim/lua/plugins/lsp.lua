@@ -141,11 +141,28 @@ return {
 				},
 
 				-- Python
+				-- pyright = {
+				-- 	on_attach = function(client, bufnr)
+				-- 		client.server_capabilities.documentFormattingProvider = false
+				-- 		on_attach(client, bufnr)
+				-- 	end,
+				-- },
 				pyright = {
 					on_attach = function(client, bufnr)
 						client.server_capabilities.documentFormattingProvider = false
 						on_attach(client, bufnr)
 					end,
+					settings = {
+						python = {
+							analysis = {
+								autoImportCompletions = true,
+								autoSearchPaths = true,
+								useLibraryCodeForTypes = true,
+								diagnosticMode = "workspace", -- index the whole project, not just open files
+								typeCheckingMode = "basic", -- or "strict" if you want more
+							},
+						},
+					},
 				},
 
 				-- Rust
