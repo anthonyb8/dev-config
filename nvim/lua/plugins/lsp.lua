@@ -24,6 +24,7 @@ return {
 		opts = {
 			ensure_installed = {
 				"jdtls",
+				"denols",
 			},
 			automatic_installation = true,
 			automatic_setup = false,
@@ -101,16 +102,38 @@ return {
 				-- 	},
 				-- },
 				ts_ls = {
+					root_dir = function(fname)
+						local util = require("lspconfig.util")
+						-- Don't attach if this is a Deno project
+						if util.root_pattern("deno.json", "deno.jsonc")(fname) then
+							return nil
+						end
+						return util.root_pattern("package.json", "tsconfig.json")(fname)
+					end,
+					single_file_support = false,
 					init_options = {
-						maxTsServerMemory = 4096, -- cap each instance at 4GB instead of unbounded
+						maxTsServerMemory = 4096,
 						preferences = {
-							includePackageJsonAutoImports = "off", -- big win, stops scanning every dep for auto-import suggestions
+							includePackageJsonAutoImports = "off",
 						},
 					},
 					settings = {
 						typescript = {
 							tsserver = {
 								maxTsServerMemory = 4096,
+							},
+						},
+					},
+				},
+
+				denols = {
+					root_dir = vim.fs.root(0, { "deno.json", "deno.jsonc" }),
+					init_options = {
+						lint = true,
+						unstable = true,
+						suggest = {
+							imports = {
+								hosts = { ["https://deno.land"] = true },
 							},
 						},
 					},
