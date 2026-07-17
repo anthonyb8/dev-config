@@ -102,13 +102,16 @@ return {
 				-- 	},
 				-- },
 				ts_ls = {
-					root_dir = function(fname)
-						local util = require("lspconfig.util")
-						-- Don't attach if this is a Deno project
-						if util.root_pattern("deno.json", "deno.jsonc")(fname) then
-							return nil
+					root_dir = function(bufnr, on_dir)
+						local deno_root = vim.fs.root(bufnr, { "deno.json", "deno.jsonc" })
+						local node_root = vim.fs.root(bufnr, { "package.json", "tsconfig.json", "jsconfig.json" })
+						if not node_root then
+							return
 						end
-						return util.root_pattern("package.json", "tsconfig.json")(fname)
+						if deno_root and #deno_root > #node_root then
+							return
+						end
+						on_dir(node_root)
 					end,
 					single_file_support = false,
 					init_options = {
@@ -128,6 +131,9 @@ return {
 
 				denols = {
 					root_dir = vim.fs.root(0, { "deno.json", "deno.jsonc" }),
+					-- root_dir = function(bufnr)
+					-- 	return vim.fs.root(bufnr, { "deno.json", "deno.jsonc" })
+					-- end,
 					init_options = {
 						lint = true,
 						unstable = true,
