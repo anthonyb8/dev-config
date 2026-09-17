@@ -48,3 +48,16 @@ fc-cache -fv
 
 fc-list | grep "FiraCode"
 
+# Linear TUI (github.com/roeyazroel/linear-tui)
+# requires go >= 1.24; installs to ~/go/bin (on PATH via .zshrc)
+go install github.com/roeyazroel/linear-tui/cmd/linear-tui@latest
+
+# auth (OAuth, opens a browser; creds -> ~/.linear-tui/credentials.json, 0600)
+linear-tui auth login
+
+# update: re-run the go install line above
+
+# ui: the details pane is padded under the default "comfortable" density and
+# sits inset vs the nav/issue panes -- "compact" drops that padding and the
+# blank lines between detail sections (also tightens modals + status bar)
+#   set "density": "compact" in ~/.linear-tui/config.json
