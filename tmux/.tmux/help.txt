@@ -1,17 +1,21 @@
-PREFIX = Ctrl+Space                
+PREFIX = Ctrl+Space
 
-SESSIONS ─────────────────┬─ WINDOWS ─────────────────
- prefix + s   switch      │  Alt + c       new
- prefix + $   rename      │  Alt + r       rename
- prefix + d   detach      │  Alt + x       kill
- prefix + n   new         │  Alt + H / L   prev / next
-                          │  Alt + 1-9     jump
-PANES ────────────────────┤  prefix + w    picker
- prefix + \   split vert  │
- prefix + '   split horiz ├─ MISC ────────────────────
- prefix + x   kill        │  prefix + p    popup
- prefix + z   scrollback  │  prefix + r    reload cfg
- Alt + hjkl   navigate    │  prefix + h    this menu
- prefix + C + hjkl resize │
-──────────────────────────┴───────────────────────────
+SESSIONS ───────────────────┬─ WINDOWS ─────────────────
+ prefix + S     project     │  Alt + c        new
+ prefix + s     switch      │  Alt + r        rename
+ prefix + n     new         │  Alt + x        kill
+ prefix + $     rename      │  Alt + H / L    prev / next
+ prefix + d     detach      │  Alt + 1-9      jump
+PANES ──────────────────────┤─ MISC ────────────────────
+ prefix + \     split vert  │  prefix + p     popup
+ prefix + '     split horiz │  prefix + r     reload cfg
+ prefix + x     kill        │  prefix + h     this menu
+ prefix + z     scrollback  │  prefix + w     window picker
+ Alt + hjkl     navigate    │
+ prefix + C-hjkl resize     │
+────────────────────────────┴───────────────────────────
+
+  tm <project>
+   1 dev  2 linear  3 git  4 deploy
+
                  q to close

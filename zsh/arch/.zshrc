@@ -25,5 +25,8 @@ export VISUAL=nvim
 # Tmux  
 DISABLE_AUTO_TITLE="true"
 
+# Project tmux session (~/.tmux/sessions/project.sh)
+tm() { ~/.tmux/session.sh "$1"; }
+
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
 

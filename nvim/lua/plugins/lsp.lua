@@ -129,6 +129,21 @@ return {
 					},
 				},
 
+				biome = {
+					-- Stock lspconfig roots on the nearest lockfile, which in a
+					-- monorepo lands in a subpackage that has no
+					-- node_modules/.bin/biome. Root on biome.json instead: that
+					-- dir has the binary, and biome handles the monorepo itself.
+					-- Returning without on_dir keeps biome off in projects that
+					-- have no biome.json.
+					root_dir = function(bufnr, on_dir)
+						local root = vim.fs.root(bufnr, { "biome.json", "biome.jsonc" })
+						if root then
+							on_dir(root)
+						end
+					end,
+				},
+
 				denols = {
 					root_dir = vim.fs.root(0, { "deno.json", "deno.jsonc" }),
 					-- root_dir = function(bufnr)

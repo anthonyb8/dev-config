@@ -3,6 +3,11 @@ return {
 	event = { "BufWritePre" },
 	cmd = { "ConformInfo" },
 	opts = {
+		formatters = {
+			-- Only run biome when a biome.json is found upward, so projects
+			-- without one fall through to prettier below.
+			["biome-check"] = { require_cwd = true },
+		},
 		formatters_by_ft = {
 			lua = { "stylua" },
 			python = { "black" },
@@ -10,14 +15,17 @@ return {
 			c = { "clang-format" },
 			cpp = { "clang-format" },
 			sh = { "shfmt" },
-			javascript = { "prettier" },
-			javascriptreact = { "prettier" },
-			typescript = { "prettier" },
-			typescriptreact = { "prettier" },
-			json = { "prettier" },
-			markdown = { "prettier" },
-			css = { "prettier" },
-			html = { "prettier" },
+			-- biome where the project has a biome.json, prettier elsewhere.
+			-- biome-check = format + organize imports + safe lint fixes.
+			javascript = { "biome-check", "prettier", stop_after_first = true },
+			javascriptreact = { "biome-check", "prettier", stop_after_first = true },
+			typescript = { "biome-check", "prettier", stop_after_first = true },
+			typescriptreact = { "biome-check", "prettier", stop_after_first = true },
+			json = { "biome-check", "prettier", stop_after_first = true },
+			jsonc = { "biome-check", "prettier", stop_after_first = true },
+			css = { "biome-check", "prettier", stop_after_first = true },
+			markdown = { "prettier" }, -- biome has no markdown formatter
+			html = { "prettier" }, -- biome's html formatter is experimental
 			dart = { "dart_format" },
 			swift = { "swiftformat" },
 		},
