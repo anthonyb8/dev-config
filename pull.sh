@@ -97,6 +97,10 @@ update() {
     cp "$SCRIPT_DIR/zsh/arch/.zshrc" "$HOME/.zshrc"
     cp "$SCRIPT_DIR/alacritty/arch/alacritty.toml" "$HOME/.config/alacritty/alacritty.toml"
 
+    mkdir -p "$HOME/.config/kitty"
+    [[ -f "$HOME/.config/kitty/kitty.conf" ]] && mv "$HOME/.config/kitty/kitty.conf" "$HOME/.config/kitty/kitty.conf_bak"
+    cp "$SCRIPT_DIR/kitty/arch/kitty.conf" "$HOME/.config/kitty/kitty.conf"
+
     mv "$HOME/.config/rofi/config.rasi" "$HOME/.config/rofi/config.rasi_bak"
     cp "$SCRIPT_DIR/rofi/config.rasi" "$HOME/.config/rofi/config.rasi"
 
@@ -106,8 +110,6 @@ update() {
     mv "$HOME/.config/rmpc/config.ron" "$HOME/.config/rmpc/config.ron_bak"
     cp "$SCRIPT_DIR/rmpc/config.ron" "$HOME/.config/rmpc/config.ron"
 
-    mv "$HOME/.config/xfce4/startup.sh" "$HOME/.config/xfce4/startup.sh_bak"
-    cp "$SCRIPT_DIR/workspace/startup.sh" "$HOME/.config/xfce4/startup.sh"
     ;;
   "debian")
     cp "$SCRIPT_DIR/zsh/debian/.zshrc" "$HOME/.zshrc"
