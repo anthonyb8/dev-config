@@ -27,6 +27,18 @@ cp -r "$HOME/.config/nvim" "$SCRIPT_DIR/"
 cp "$HOME/.tmux.conf" "$SCRIPT_DIR/tmux/"
 rsync -a --exclude='plugins/' "$HOME/.tmux/" "$SCRIPT_DIR/tmux/.tmux/"
 
+[ -f "$HOME/.claude/CLAUDE.md" ] && cp "$HOME/.claude/CLAUDE.md" "$SCRIPT_DIR/claude/"
+[ -f "$HOME/.claude/OPINIONS.md" ] && cp "$HOME/.claude/OPINIONS.md" "$SCRIPT_DIR/claude/"
+[ -f "$HOME/.claude/VOICE.md" ] && cp "$HOME/.claude/VOICE.md" "$SCRIPT_DIR/claude/"
+[ -d "$HOME/.claude/skills" ] && rsync -a "$HOME/.claude/skills/" "$SCRIPT_DIR/claude/skills/"
+
+# linear-tui settings. Copy named files only, never the directory: it also
+# holds credentials.json (the OAuth token) and app.log, which must not be
+# committed. .gitignore backs this up in case something copies them anyway.
+mkdir -p "$SCRIPT_DIR/linear"
+[ -f "$HOME/.linear-tui/config.json" ] && cp "$HOME/.linear-tui/config.json" "$SCRIPT_DIR/linear/"
+[ -f "$HOME/.linear-tui/prompts.json" ] && cp "$HOME/.linear-tui/prompts.json" "$SCRIPT_DIR/linear/"
+
 case "$OS" in
 "arch")
   cp "$HOME/.zshrc" "$SCRIPT_DIR/zsh/arch/"

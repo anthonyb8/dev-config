@@ -1,0 +1,11 @@
+# linear-tui stores its OAuth token next to its config. Only config.json and
+# prompts.json are tracked (see push.sh); this is a second line of defence so
+# the token can never be committed by a stray `git add .`.
+linear/credentials.json
+linear/*.log
+linear/*.bak
+
+# Generic secret shapes, in case another tool's config lands here.
+*credentials.json
+*.pem
+*.key

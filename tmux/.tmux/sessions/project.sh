@@ -27,8 +27,9 @@ tmux send-keys -t "$name:dev" "$claude_cmd" C-m
 tmux select-pane -t "$name:dev" -T claude
 
 # ── 2. linear ─────────────────────────────────────────────────────────
-# linear-tui: github.com/roeyazroel/linear-tui
-#   go install github.com/roeyazroel/linear-tui/cmd/linear-tui@latest
+# linear-tui: personal fork, github.com/anthonyb8/linear-tui
+#   source lives in ~/projects/linear-tui; install with `make install` there
+#   update: lt-update   (shell function in .zshrc)
 #   auth: linear-tui auth login  (creds in ~/.linear-tui/credentials.json)
 #
 # sent as keys, not as the window command, so an exit (or a missing auth

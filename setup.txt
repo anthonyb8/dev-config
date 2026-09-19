@@ -48,14 +48,28 @@ fc-cache -fv
 
 fc-list | grep "FiraCode"
 
-# Linear TUI (github.com/roeyazroel/linear-tui)
+# Linear TUI -- personal fork (github.com/anthonyb8/linear-tui)
 # requires go >= 1.24; installs to ~/go/bin (on PATH via .zshrc)
-go install github.com/roeyazroel/linear-tui/cmd/linear-tui@latest
+#
+# Installed from a clone, not `go install <url>@latest`: the fork keeps
+# upstream's module path (github.com/roeyazroel/linear-tui) so merging
+# upstream stays clean, which means the fork URL is not `go install`-able.
+git clone git@github.com:anthonyb8/linear-tui.git ~/projects/linear-tui
+cd ~/projects/linear-tui && make install
 
 # auth (OAuth, opens a browser; creds -> ~/.linear-tui/credentials.json, 0600)
 linear-tui auth login
 
-# update: re-run the go install line above
+# update: lt-update  (shell function in .zshrc; pulls and reinstalls)
+# which build am I running: linear-tui --version
+
+# settings are tracked in this repo under linear/ and synced by push.sh/pull.sh:
+#   linear/config.json    theme, density, default_team, agent settings
+#   linear/prompts.json   agent prompt templates
+# credentials.json is deliberately NOT tracked (it holds the OAuth token) and
+# pull.sh never touches it, so syncing configs will not log you out.
+# note: config.json's log_file is an absolute path, so it needs adjusting if
+# this is ever pulled onto macOS.
 
 # ui: the details pane is padded under the default "comfortable" density and
 # sits inset vs the nav/issue panes -- "compact" drops that padding and the

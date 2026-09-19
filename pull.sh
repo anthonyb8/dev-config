@@ -29,6 +29,10 @@ CONFIG_FILES=(
   "$SCRIPT_DIR/nvim"
   "$SCRIPT_DIR/tmux/.tmux.conf"
   "$SCRIPT_DIR/tmux/.tmux"
+  "$SCRIPT_DIR/claude/CLAUDE.md"
+  "$SCRIPT_DIR/claude/OPINIONS.md"
+  "$SCRIPT_DIR/claude/VOICE.md"
+  "$SCRIPT_DIR/claude/skills"
 )
 
 # Define where to move the configurations on the machine
@@ -36,11 +40,18 @@ TARGET_DIRS=(
   "$HOME/.config/nvim"
   "$HOME/.tmux.conf"
   "$HOME/.tmux"
+  "$HOME/.claude/CLAUDE.md"
+  "$HOME/.claude/OPINIONS.md"
+  "$HOME/.claude/VOICE.md"
+  "$HOME/.claude/skills"
 )
 
 git pull
 
 update() {
+  # Ensure parent dirs that may not exist on a fresh machine
+  mkdir -p "$HOME/.claude"
+
   # Restore the configuration files by movi# Restore the configuration files with backups
   for i in "${!CONFIG_FILES[@]}"; do
     # Check if the target exists
@@ -63,6 +74,17 @@ update() {
       # If source is a file, copy the file
       cp "${CONFIG_FILES[i]}" "${TARGET_DIRS[i]}"
       echo "Copied ${CONFIG_FILES[i]} ${TARGET_DIRS[i]}"
+    fi
+  done
+
+  # linear-tui settings. Only config.json and prompts.json are tracked;
+  # credentials.json is deliberately left alone so pulling never logs you out.
+  mkdir -p "$HOME/.linear-tui"
+  for f in config.json prompts.json; do
+    if [[ -f "$SCRIPT_DIR/linear/$f" ]]; then
+      [[ -f "$HOME/.linear-tui/$f" ]] && mv "$HOME/.linear-tui/$f" "$HOME/.linear-tui/${f}_bak"
+      cp "$SCRIPT_DIR/linear/$f" "$HOME/.linear-tui/$f"
+      echo "Copied $SCRIPT_DIR/linear/$f $HOME/.linear-tui/$f"
     fi
   done
 
