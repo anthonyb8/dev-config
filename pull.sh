@@ -32,6 +32,7 @@ CONFIG_FILES=(
   "$SCRIPT_DIR/claude/CLAUDE.md"
   "$SCRIPT_DIR/claude/OPINIONS.md"
   "$SCRIPT_DIR/claude/VOICE.md"
+  "$SCRIPT_DIR/claude/settings.json"
   "$SCRIPT_DIR/claude/skills"
 )
 
@@ -43,6 +44,7 @@ TARGET_DIRS=(
   "$HOME/.claude/CLAUDE.md"
   "$HOME/.claude/OPINIONS.md"
   "$HOME/.claude/VOICE.md"
+  "$HOME/.claude/settings.json"
   "$HOME/.claude/skills"
 )
 

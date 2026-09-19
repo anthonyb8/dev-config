@@ -1,0 +1,52 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(treehouse)",
+      "Bash(treehouse:*)",
+      "Bash(no-mistakes)",
+      "Bash(no-mistakes:*)"
+    ],
+    "deny": [
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(git merge:*)",
+      "Bash(git rebase:*)",
+      "Bash(git reset:*)",
+      "Bash(git revert:*)",
+      "Bash(git cherry-pick:*)",
+      "Bash(git restore:*)",
+      "Bash(git checkout:*)",
+      "Bash(git switch:*)",
+      "Bash(git clean:*)",
+      "Bash(git stash:*)",
+      "Bash(git add:*)",
+      "Bash(git rm:*)",
+      "Bash(git mv:*)",
+      "Bash(git tag:*)",
+      "Bash(git branch:*)",
+      "Bash(git pull:*)",
+      "Bash(git remote:*)",
+      "Bash(git config:*)",
+      "Bash(git apply:*)",
+      "Bash(git am:*)",
+      "Bash(git worktree:*)",
+      "Bash(git filter-branch:*)",
+      "Bash(git update-ref:*)",
+      "Bash(git gc:*)",
+      "Bash(git prune:*)",
+      "Bash(gh pr create:*)",
+      "Bash(gh pr merge:*)",
+      "Bash(gh pr edit:*)",
+      "Bash(gh pr close:*)",
+      "Bash(gh release create:*)",
+      "Bash(gh repo create:*)",
+      "Bash(gh api:*)"
+    ],
+    "defaultMode": "plan"
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "input=$(cat); cwd=$(echo \"$input\" | jq -r '.workspace.current_dir'); printf '[%s@%s %s]' \"$(whoami)\" \"$(hostname -s)\" \"$(basename \"$cwd\")\""
+  },
+  "theme": "dark-ansi"
+}

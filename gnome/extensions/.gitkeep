@@ -1,0 +1,9 @@
+Locally-written GNOME extensions go here, one directory per extension, named by
+its uuid (e.g. workspace-numbers@local). install-extensions.sh symlinks each one
+into ~/.local/share/gnome-shell/extensions and enables it in dconf.
+
+This placeholder exists because git does not track empty directories, and the
+script needs the directory to be present on a fresh clone.
+
+Extensions installed from extensions.gnome.org are not tracked here; they live
+in ~/.local/share/gnome-shell/extensions and are managed by GNOME itself.

@@ -6,6 +6,14 @@ configuration {
   sorting-method: "fzf";
   case-sensitive: false;
   normalize-match: true;
+
+  /* Icons. Without icon-theme rofi resolves against hicolor only, so just the
+     apps that ship their own icon show up and everything else comes out blank.
+     Gruvbox-Plus-Dark carries 16209 app icons; Adwaita carries 1. Naming it
+     here rather than relying on the desktop setting also keeps rofi correct
+     under XWayland, where it cannot read GNOME's icon-theme. */
+  show-icons: true;
+  icon-theme: "Gruvbox-Plus-Dark";
 }
 
 @theme "gruvbox-dark-soft"

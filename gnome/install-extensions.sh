@@ -12,7 +12,12 @@
 
 set -euo pipefail
 
-SRC_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/extensions" && pwd)"
+SRC_DIR="$(dirname "${BASH_SOURCE[0]}")/extensions"
+if [ ! -d "$SRC_DIR" ]; then
+  echo "  no extensions/ directory next to this script; nothing to link."
+  exit 0
+fi
+SRC_DIR="$(cd "$SRC_DIR" && pwd)"
 DST_DIR="$HOME/.local/share/gnome-shell/extensions"
 mkdir -p "$DST_DIR"
 
@@ -47,7 +52,14 @@ rm -f /tmp/.gnome-ext-list
 echo
 echo "  enabled-extensions: $(gsettings get org.gnome.shell enabled-extensions)"
 echo
+if [ ${#uuids[@]} -eq 0 ]; then
+  echo "  No local extensions in $SRC_DIR yet."
+  exit 0
+fi
+
 echo "  Log out and back in for a newly-added extension to load."
-echo "  Then check it came up clean:"
-echo "    gnome-extensions info workspace-numbers@local | grep State"
-echo "    journalctl --user -b /usr/bin/gnome-shell | grep workspace-numbers"
+echo "  Then check each came up clean:"
+for uuid in "${uuids[@]}"; do
+  echo "    gnome-extensions info $uuid | grep State"
+  echo "    journalctl --user -b /usr/bin/gnome-shell | grep ${uuid%%@*}"
+done

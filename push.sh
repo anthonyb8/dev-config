@@ -30,6 +30,7 @@ rsync -a --exclude='plugins/' "$HOME/.tmux/" "$SCRIPT_DIR/tmux/.tmux/"
 [ -f "$HOME/.claude/CLAUDE.md" ] && cp "$HOME/.claude/CLAUDE.md" "$SCRIPT_DIR/claude/"
 [ -f "$HOME/.claude/OPINIONS.md" ] && cp "$HOME/.claude/OPINIONS.md" "$SCRIPT_DIR/claude/"
 [ -f "$HOME/.claude/VOICE.md" ] && cp "$HOME/.claude/VOICE.md" "$SCRIPT_DIR/claude/"
+[ -f "$HOME/.claude/settings.json" ] && cp "$HOME/.claude/settings.json" "$SCRIPT_DIR/claude/"
 [ -d "$HOME/.claude/skills" ] && rsync -a "$HOME/.claude/skills/" "$SCRIPT_DIR/claude/skills/"
 
 # linear-tui settings. Copy named files only, never the directory: it also
