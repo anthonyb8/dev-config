@@ -22,10 +22,8 @@ return {
 		"williamboman/mason-lspconfig.nvim",
 		lazy = false,
 		opts = {
-			ensure_installed = {
-				"jdtls",
-				"denols",
-			},
+			-- Installs are mason-tool-installer's job below; a second list
+			-- here would drift, and it names servers the other way round.
 			automatic_installation = true,
 			automatic_setup = false,
 			automatic_enable = false, -- added to stop mutiple servers from starting
@@ -39,8 +37,58 @@ return {
 		end,
 	},
 
+	-- The one list of everything Mason installs: servers, formatters, linters
+	-- and debug adapters. A fresh machine installs the lot on first launch,
+	-- so a tool only works here if it is named below.
+	-- Names are Mason package names, not lspconfig server names, so lua_ls is
+	-- "lua-language-server" and ts_ls is "typescript-language-server".
+	-- Servers the system or the project provides are deliberately absent:
+	-- rust_analyzer comes from rustup, clangd and sourcekit from the toolchain,
+	-- solargraph from a gem, biome from the project's own node_modules.
 	-- https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim
-	{ "WhoIsSethDaniel/mason-tool-installer.nvim" },
+	{
+		"WhoIsSethDaniel/mason-tool-installer.nvim",
+		lazy = false,
+		dependencies = { "mason-org/mason.nvim" },
+		opts = {
+			ensure_installed = {
+				-- LSP servers
+				"bash-language-server",
+				"css-lsp",
+				"deno",
+				"harper-ls",
+				"html-lsp",
+				"jdtls",
+				"lua-language-server",
+				"marksman",
+				"pyright",
+				"typescript-language-server",
+
+				-- Formatters
+				"black",
+				"clang-format",
+				"prettier",
+				"shfmt",
+				"stylua",
+
+				-- Linters
+				"ruff",
+				"shellcheck",
+
+				-- Debug adapters, and the jdtls test bundle
+				"codelldb",
+				"debugpy",
+				"java-test",
+			},
+			-- Install on launch, but never upgrade behind your back: a formatter
+			-- that changes its output mid-session rewrites files unasked.
+			-- Dropping a tool from the list above does not uninstall it.
+			-- :MasonToolsClean uninstalls everything Mason holds that is not
+			-- named above, which is the other half of keeping this list honest.
+			run_on_start = true,
+			auto_update = false,
+		},
+	},
 
 	-- {
 	-- 	"MysticalDevil/inlay-hints.nvim",

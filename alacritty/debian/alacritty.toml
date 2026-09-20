@@ -22,10 +22,3 @@ style.shape="Block"
 style.blinking="Always"
 thickness=1.0
 unfocused_hollow=true
-
-
-[terminal]
-shell = { program = "/home/linuxbrew/.linuxbrew/bin/tmux", args = ["new-session"] }
-
-
-

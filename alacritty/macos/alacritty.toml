@@ -24,9 +24,3 @@ unfocused_hollow=true
 
 [colors]
 cursor= { text = "#181818", cursor = "#8e8e8e" }
-
-[terminal]
-shell = { program = "/usr/local/bin/tmux", args = ["new-session"] }
-
-
-
