@@ -1,0 +1,86 @@
+#!/bin/bash
+# Move in-progress work between machines.
+#
+# A worktree cannot travel. Its .git holds an absolute path to the main
+# repository's admin directory and that directory holds an absolute path back,
+# so a copied worktree points at a repository that is not there. Branches
+# travel; the worktree is rebuilt at the other end.
+#
+#   handoff push   send this worktree's uncommitted state to the other machine
+#   handoff pull   receive it here
+#
+# The state rides on refs/wip/<branch>, never on the branch itself, so no
+# feature branch ever carries a throwaway commit and no push is ever forced.
+
+set -euo pipefail
+
+usage() {
+  echo "Usage: handoff push|pull [branch]"
+  exit 2
+}
+
+[[ $# -ge 1 ]] || usage
+CMD="$1"
+git rev-parse --git-dir >/dev/null 2>&1 || {
+  echo "Not a git repository." >&2
+  exit 1
+}
+
+BRANCH="${2:-$(git rev-parse --abbrev-ref HEAD)}"
+[[ "$BRANCH" != "HEAD" ]] || {
+  echo "Detached HEAD. Name a branch." >&2
+  exit 1
+}
+WIP="refs/wip/$BRANCH"
+
+case "$CMD" in
+push)
+  # Build the commit with plumbing rather than `git commit`: HEAD, the branch
+  # and the working tree all stay exactly as they are, so an interrupted
+  # handoff leaves nothing to undo. Only the index is touched, and it is
+  # restored below.
+  # `add` only stages so the tree can be hashed. Restore the index on every
+  # exit path, or a failed push leaves everything staged.
+  trap 'git reset -q >/dev/null 2>&1 || true' EXIT
+  git add -A
+  TREE=$(git write-tree)
+  if [[ "$TREE" == "$(git rev-parse "HEAD^{tree}")" ]]; then
+    git reset -q
+    echo "Nothing uncommitted on $BRANCH. Push the branch itself instead."
+    exit 0
+  fi
+  COMMIT=$(git commit-tree "$TREE" -p HEAD \
+    -m "wip: handoff from $(hostname -s) at $(date '+%Y-%m-%d %H:%M')")
+  # The '+' forces the wip ref alone. A bare --force would cover both
+  # refspecs and rewind the branch on origin whenever this clone is behind.
+  git push origin "$BRANCH:$BRANCH" "+$COMMIT:$WIP"
+  git reset -q
+  echo
+  echo "Sent $BRANCH + uncommitted state."
+  echo "On the other machine:  handoff pull $BRANCH"
+  ;;
+
+pull)
+  git fetch -q origin "$BRANCH:refs/remotes/origin/$BRANCH" "+$WIP:$WIP" 2>/dev/null ||
+    git fetch -q origin "+$WIP:$WIP"
+  git rev-parse --verify -q "$WIP" >/dev/null || {
+    echo "No handoff waiting for $BRANCH." >&2
+    exit 1
+  }
+  [[ -z "$(git status --porcelain)" ]] || {
+    echo "Working tree is dirty. Commit or clear it before pulling a handoff." >&2
+    exit 1
+  }
+  [[ "$(git rev-parse --abbrev-ref HEAD)" == "$BRANCH" ]] || {
+    echo "On $(git rev-parse --abbrev-ref HEAD), not $BRANCH. Check out the branch first." >&2
+    exit 1
+  }
+
+  git checkout -q "$WIP" -- :/
+  git reset -q
+  echo "Restored the uncommitted state from $WIP."
+  echo "Files deleted on the other machine are not removed here; check git status."
+  ;;
+
+*) usage ;;
+esac

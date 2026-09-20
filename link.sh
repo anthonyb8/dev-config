@@ -40,6 +40,14 @@ OS=$(os)
 # them. Override the location with DEV_MEMORY_REPO.
 MEMORY_REPO="${DEV_MEMORY_REPO:-$HOME/dev-memory}"
 
+# Role, not OS. A headless server runs the same Arch as a workstation but has no
+# terminal emulator, so its zshrc has to start tmux itself, and linking configs
+# for alacritty, kitty, rofi, mpd and rmpc would point at programs that are not
+# installed. A marker file rather than an environment variable, because this
+# script is meant to be runnable from a timer, where no interactive environment
+# exists to carry one.
+ROLE="${DEV_CONFIG_ROLE:-$(cat "$HOME/.config/dev-config/role" 2>/dev/null || echo workstation)}"
+
 LINKED=0
 ADOPTED=0
 RESTORED=0
@@ -59,9 +67,14 @@ PAIRS=(
   "$SCRIPT_DIR/claude/skills|$HOME/.claude/skills"
   "$SCRIPT_DIR/treehouse/config.toml|$HOME/.config/treehouse/config.toml"
   "$SCRIPT_DIR/bin/agent-fanout|$HOME/.local/bin/agent-fanout"
+  "$SCRIPT_DIR/bin/handoff|$HOME/.local/bin/handoff"
   "$SCRIPT_DIR/linear/config.json|$HOME/.linear-tui/config.json"
   "$SCRIPT_DIR/linear/prompts.json|$HOME/.linear-tui/prompts.json"
 )
+
+if [[ "$ROLE" == "server" ]]; then
+  PAIRS+=( "$SCRIPT_DIR/zsh/server/.zshrc|$HOME/.zshrc" )
+else
 
 # Per-OS variants stay separate files; each machine links the one that applies.
 case "$OS" in
@@ -91,6 +104,8 @@ case "$OS" in
   echo "Unknown OS; linking the OS-neutral files only."
   ;;
 esac
+
+fi
 
 # Claude writes per-project memory under a directory named for the project's
 # absolute path, so the paths have to match across machines for these to line
