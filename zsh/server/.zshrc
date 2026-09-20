@@ -1,5 +1,21 @@
 #.zshrc
 
+# On a workstation the terminal emulator starts tmux through its shell setting,
+# in alacritty.toml and kitty.conf. A server has no emulator, so nothing starts
+# it and a dropped ssh connection takes running work with it.
+#
+# Guards, in order: interactive only, so scp and rsync are unaffected; over ssh
+# only; never nested inside an existing session; and tmux must exist. Never
+# exec, so a broken tmux leaves a usable shell rather than an unusable login.
+#
+# This has to run before the instant prompt preamble below. Instant prompt takes
+# over stdin and stdout for the rest of .zshrc, so tmux started after it cannot
+# open the terminal: it dies with "open terminal failed: not a terminal", and
+# that stray line is itself what makes p10k warn about console output on login.
+if [[ -o interactive && -n "$SSH_CONNECTION" && -z "$TMUX" ]] && command -v tmux >/dev/null; then
+  tmux attach-session -t main 2>/dev/null || tmux new-session -s main
+fi
+
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
@@ -21,6 +37,7 @@ plugins=(git)
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 export PATH="$HOME/.secretz/bin:$PATH"
 export PATH="$HOME/go/bin:$PATH"          # go install binaries (linear-tui)
+export PATH="$HOME/.local/bin:$PATH"      # native installs (claude)
 
 # linear-tui: personal fork at github.com/anthonyb8/linear-tui.
 # Installed from the clone rather than `go install <url>@latest`, because the
@@ -43,17 +60,6 @@ export VISUAL=nvim
 
 # Tmux
 DISABLE_AUTO_TITLE="true"
-
-# On a workstation the terminal emulator starts tmux through its shell setting,
-# in alacritty.toml and kitty.conf. A server has no emulator, so nothing starts
-# it and a dropped ssh connection takes running work with it.
-#
-# Guards, in order: interactive only, so scp and rsync are unaffected; over ssh
-# only; never nested inside an existing session; and tmux must exist. Never
-# exec, so a broken tmux leaves a usable shell rather than an unusable login.
-if [[ -o interactive && -n "$SSH_CONNECTION" && -z "$TMUX" ]] && command -v tmux >/dev/null; then
-  tmux attach-session -t main 2>/dev/null || tmux new-session -s main
-fi
 
 # Project tmux session (~/.tmux/sessions/project.sh)
 tm() { ~/.tmux/session.sh "$1"; }
