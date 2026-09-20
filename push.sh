@@ -33,6 +33,13 @@ rsync -a --exclude='plugins/' "$HOME/.tmux/" "$SCRIPT_DIR/tmux/.tmux/"
 [ -f "$HOME/.claude/settings.json" ] && cp "$HOME/.claude/settings.json" "$SCRIPT_DIR/claude/"
 [ -d "$HOME/.claude/skills" ] && rsync -a "$HOME/.claude/skills/" "$SCRIPT_DIR/claude/skills/"
 
+# treehouse pool config and the fan-out wrapper. The hook that provisions a
+# leased worktree only works in the user-level config: hooks in a repo-level
+# treehouse.toml are ignored so an untrusted clone cannot run checked-in shell.
+mkdir -p "$SCRIPT_DIR/treehouse" "$SCRIPT_DIR/bin"
+[ -f "$HOME/.config/treehouse/config.toml" ] && cp "$HOME/.config/treehouse/config.toml" "$SCRIPT_DIR/treehouse/"
+[ -f "$HOME/.local/bin/agent-fanout" ] && cp "$HOME/.local/bin/agent-fanout" "$SCRIPT_DIR/bin/"
+
 # linear-tui settings. Copy named files only, never the directory: it also
 # holds credentials.json (the OAuth token) and app.log, which must not be
 # committed. .gitignore backs this up in case something copies them anyway.

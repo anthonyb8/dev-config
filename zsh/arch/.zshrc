@@ -51,18 +51,36 @@ export NO_MISTAKES_NO_UPDATE_CHECK=1
 # treehouse: pooled git worktrees so several agents can share one repo
 # NB: the locals below are named wt, not path. In zsh, path is tied to PATH,
 # so a local named path breaks command lookup inside the function.
-# th <branch>   lease a worktree from the pool and start a branch in it.
+# th <branch> [base]   lease a worktree from the pool and start a branch in it.
 # Pooled worktrees are handed out detached, and no-mistakes gates a branch,
 # so the branch has to exist before the gate will run.
+#
+# They are handed out at origin/HEAD, which is the remote's default branch.
+# A repo whose work merges into anything else has to name the base, or the
+# branch silently starts behind: on endo-supabase origin/dev leads
+# origin/main, so `th <branch> dev` is the correct call there.
 th() {
   if [[ -z "$1" ]]; then
-    print -u2 "usage: th <branch>"
+    print -u2 "usage: th <branch> [base]"
     return 2
   fi
-  local wt
+  local wt base="$2"
+  # Validate the base before leasing. Checking after would burn a pool slot
+  # and leave it held on nothing more than a typo.
+  if [[ -n "$base" ]]; then
+    git fetch --quiet origin || return
+    if ! git rev-parse --verify --quiet "origin/$base" >/dev/null; then
+      print -u2 "th: no such base branch: origin/$base"
+      return 1
+    fi
+  fi
   wt=$(treehouse get --lease --lease-holder "${TREEHOUSE_LEASE_HOLDER:-$USER}") || return
   cd "$wt" || return
-  git switch -c "$1"
+  if [[ -n "$base" ]]; then
+    git switch -c "$1" "origin/$base"
+  else
+    git switch -c "$1"
+  fi
 }
 
 # thr [path]    return a worktree to the pool, stepping back to the main

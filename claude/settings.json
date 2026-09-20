@@ -42,7 +42,7 @@
       "Bash(gh repo create:*)",
       "Bash(gh api:*)"
     ],
-    "defaultMode": "plan"
+    "defaultMode": "acceptEdits"
   },
   "statusLine": {
     "type": "command",

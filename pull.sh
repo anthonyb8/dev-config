@@ -34,6 +34,8 @@ CONFIG_FILES=(
   "$SCRIPT_DIR/claude/VOICE.md"
   "$SCRIPT_DIR/claude/settings.json"
   "$SCRIPT_DIR/claude/skills"
+  "$SCRIPT_DIR/treehouse/config.toml"
+  "$SCRIPT_DIR/bin/agent-fanout"
 )
 
 # Define where to move the configurations on the machine
@@ -46,13 +48,15 @@ TARGET_DIRS=(
   "$HOME/.claude/VOICE.md"
   "$HOME/.claude/settings.json"
   "$HOME/.claude/skills"
+  "$HOME/.config/treehouse/config.toml"
+  "$HOME/.local/bin/agent-fanout"
 )
 
 git pull
 
 update() {
   # Ensure parent dirs that may not exist on a fresh machine
-  mkdir -p "$HOME/.claude"
+  mkdir -p "$HOME/.claude" "$HOME/.config/treehouse" "$HOME/.local/bin"
 
   # Restore the configuration files by movi# Restore the configuration files with backups
   for i in "${!CONFIG_FILES[@]}"; do
@@ -78,6 +82,10 @@ update() {
       echo "Copied ${CONFIG_FILES[i]} ${TARGET_DIRS[i]}"
     fi
   done
+
+  # agent-fanout is executed, not sourced, so the exec bit has to survive the
+  # copy however cp happens to behave on this platform.
+  [[ -f "$HOME/.local/bin/agent-fanout" ]] && chmod +x "$HOME/.local/bin/agent-fanout"
 
   # linear-tui settings. Only config.json and prompts.json are tracked;
   # credentials.json is deliberately left alone so pulling never logs you out.

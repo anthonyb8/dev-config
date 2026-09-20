@@ -1,0 +1,85 @@
+#!/usr/bin/env bash
+# Lease one treehouse worktree per task, put each on its own branch, and launch
+# one agent in each.
+#
+#   agent-fanout [--base dev] [--serial] [--dry-run] [--holder NAME]
+#                "branch=prompt" ["branch=prompt" ...]
+#
+# Treehouse hands out worktrees detached at origin/HEAD, which is not
+# necessarily the branch work starts from, so the base is set explicitly here.
+# Dependencies and env files come from the post_create hook in
+# ~/.config/treehouse/config.toml, so a leased tree is ready to build.
+#
+# Release with:  treehouse return <path>
+set -euo pipefail
+
+BASE=dev
+SERIAL=0
+DRY=0
+HOLDER=${TREEHOUSE_LEASE_HOLDER:-agent-fanout}
+
+usage() { awk 'NR>1 && /^#/ {sub(/^# ?/,""); print; next} NR>1 {exit}' "$0"; exit "${1:-0}"; }
+
+while [ $# -gt 0 ]; do
+  case "$1" in
+    --base)    BASE=$2; shift 2 ;;
+    --holder)  HOLDER=$2; shift 2 ;;
+    --serial)  SERIAL=1; shift ;;
+    --dry-run) DRY=1; shift ;;
+    -h|--help) usage 0 ;;
+    --) shift; break ;;
+    -*) echo "unknown flag: $1" >&2; usage 1 ;;
+    *) break ;;
+  esac
+done
+
+[ $# -gt 0 ] || { echo "no tasks given" >&2; usage 1; }
+
+command -v treehouse >/dev/null || { echo "treehouse not on PATH" >&2; exit 1; }
+command -v claude    >/dev/null || { echo "claude not on PATH" >&2; exit 1; }
+
+REPO=$(git rev-parse --show-toplevel) || exit 1
+cd "$REPO"
+
+# Fail before leasing anything if the base is wrong, rather than half way through.
+git fetch --quiet origin
+git rev-parse --verify --quiet "origin/$BASE" >/dev/null \
+  || { echo "no such base branch: origin/$BASE" >&2; exit 1; }
+
+printf '%-52s  %-8s  %s\n' BRANCH SESSION PATH
+rows=()
+
+for task in "$@"; do
+  case "$task" in *=*) ;; *) echo "expected branch=prompt, got: $task" >&2; exit 1 ;; esac
+  branch=${task%%=*}
+  prompt=${task#*=}
+
+  if [ "$DRY" = 1 ]; then
+    printf '%-52s  %-8s  %s\n' "$branch" "(dry)" "would lease from pool off origin/$BASE"
+    continue
+  fi
+
+  path=$(treehouse get --lease --json --lease-holder "$HOLDER:$branch" 2>/dev/null \
+         | sed -n 's/.*"path":"\([^"]*\)".*/\1/p')
+  [ -n "$path" ] || { echo "lease failed for $branch (pool exhausted? run: treehouse status)" >&2; exit 1; }
+
+  # -B so a re-run onto a recycled tree resets the branch instead of failing.
+  git -C "$path" checkout -q -B "$branch" "origin/$BASE"
+
+  if [ "$SERIAL" = 1 ]; then
+    ( cd "$path" && claude "$prompt" )
+    sid="(serial)"
+  else
+    sid=$( cd "$path" && claude --bg "$prompt" 2>&1 \
+           | sed -n 's/.*claude attach \([0-9a-f]\{8\}\).*/\1/p' | head -1 )
+    sid=${sid:-"(started)"}
+  fi
+
+  printf '%-52s  %-8s  %s\n' "$branch" "$sid" "$path"
+  rows+=("$path")
+done
+
+if [ "$DRY" != 1 ] && [ ${#rows[@]} -gt 0 ]; then
+  printf '\nRelease when done:\n'
+  for p in "${rows[@]}"; do printf '  treehouse return %s\n' "$p"; done
+fi

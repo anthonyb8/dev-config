@@ -1,0 +1,19 @@
+# Personal treehouse config. Hooks only work here: hooks in a repo-level
+# treehouse.toml are ignored so an untrusted clone cannot run checked-in shell.
+
+max_trees = 8
+
+[hooks]
+# Runs in the worktree after it is provisioned or reset, just before `get`
+# hands it over. Each entry is a shell command run in the worktree; a failure
+# is logged and does not abort the lease, so check the tree before trusting it.
+#
+# Every entry is guarded because this config applies to every repo.
+# The Doppler step is the one that is easy to miss: scope is per-directory,
+# so a fresh worktree resolves no project and `env:pull` fails without
+# `setup` first.
+post_create = [
+  "if [ -f package.json ]; then npm ci; fi",
+  "if [ -f ui/package.json ]; then npm ci --prefix ui; fi",
+  "if [ -f doppler.yaml ]; then doppler setup --no-interactive && npm run env:pull; fi",
+]
