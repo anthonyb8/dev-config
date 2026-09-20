@@ -9,3 +9,8 @@ linear/*.bak
 *credentials.json
 *.pem
 *.key
+
+# Backups left by link.sh when it adopts a file an application rewrote, and by
+# pull.sh when it displaces a live file. Both are recovery copies, not config.
+*.bak
+*_bak

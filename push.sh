@@ -23,6 +23,18 @@ os() {
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 OS=$(os)
 
+# Once link.sh has pointed the live paths at this repo, every copy below is
+# redundant and wrong: the source is a symlink to the destination, so cp is
+# being asked to copy a file onto itself. Editing the live path already edited
+# the repo, leaving nothing to do but commit.
+LINKED_MODE=false
+if [[ -L "$HOME/.zshrc" && "$(readlink "$HOME/.zshrc")" == "$SCRIPT_DIR"* ]]; then
+  LINKED_MODE=true
+  echo "Linked mode: live paths are symlinks into this repo; skipping the copy step."
+fi
+
+if [[ "$LINKED_MODE" == false ]]; then
+
 cp -r "$HOME/.config/nvim" "$SCRIPT_DIR/"
 cp "$HOME/.tmux.conf" "$SCRIPT_DIR/tmux/"
 rsync -a --exclude='plugins/' "$HOME/.tmux/" "$SCRIPT_DIR/tmux/.tmux/"
@@ -70,9 +82,25 @@ case "$OS" in
   ;;
 esac
 
+fi
+
 push() {
-  git add .
-  git commit -m "Update configuration files"
+  if [[ -n "$(git status --porcelain)" ]]; then
+    git add .
+    git commit -m "Update configuration files"
+  else
+    echo "Nothing to commit."
+  fi
+
+  # Rebase after committing, never before: the copy step leaves the tree dirty
+  # and git refuses to rebase over that. Without this, a day spent editing on
+  # two machines collides at push time, when the fix is least likely to be
+  # careful.
+  if ! git pull --rebase; then
+    echo "Rebase hit a conflict. Resolve it, then re-run push.sh." >&2
+    return 1
+  fi
+
   git push origin main
 }
 
