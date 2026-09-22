@@ -139,3 +139,38 @@ end
 -- 		require("jdtls.jdtls_setup").setup()
 -- 	end,
 -- })
+
+-- Clipboard over OSC 52.
+--
+-- The keymaps yank into "+, which needs a provider. On a desktop that is
+-- xclip or wl-copy; on the headless Arch box there is no display and neither
+-- binary exists, so "+y quietly went nowhere. OSC 52 sends the text to the
+-- terminal emulator instead of to a local clipboard daemon, which means it
+-- crosses SSH and tmux and lands on the clipboard of the machine in front of
+-- you.
+--
+-- Only when there is no real local clipboard to prefer: on macOS and on a
+-- desktop session the native provider is better, because it supports reading
+-- as well as writing.
+local has_local_clipboard = vim.fn.has("mac") == 1
+  or vim.env.DISPLAY ~= nil
+  or vim.env.WAYLAND_DISPLAY ~= nil
+
+if not has_local_clipboard then
+  local osc52 = require("vim.ui.clipboard.osc52")
+
+  -- Paste deliberately does not ask the terminal for its clipboard. Almost
+  -- every terminal refuses an OSC 52 read by default, and a refusal is
+  -- indistinguishable from a slow answer, so nvim blocks until it times out
+  -- on every "+p. Reading back the unnamed register is instant and is what
+  -- you actually want, since the last yank is what put the text there.
+  local function paste_from_unnamed()
+    return vim.split(vim.fn.getreg('"'), "\n")
+  end
+
+  vim.g.clipboard = {
+    name = "OSC 52",
+    copy = { ["+"] = osc52.copy("+"), ["*"] = osc52.copy("*") },
+    paste = { ["+"] = paste_from_unnamed, ["*"] = paste_from_unnamed },
+  }
+end
