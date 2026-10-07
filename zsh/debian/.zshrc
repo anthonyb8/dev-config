@@ -133,8 +133,6 @@ export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="/home/linuxbrew/.linuxbrew/opt/postgresql@16/bin:$PATH"
 export PATH="/home/linuxbrew/.linuxbrew/opt/postgresql@14/bin:$PATH"
 
-KITTY_OS="linux"
-
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 

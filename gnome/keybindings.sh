@@ -5,7 +5,7 @@
 #
 # Idempotent: safe to re-run, and prints the same output every time.
 # Everything lands in dconf, so nothing here needs root and nothing here
-# is deployed by push.sh/pull.sh - this script IS the source of truth.
+# is linked by link.sh - this script IS the source of truth.
 
 set -euo pipefail
 

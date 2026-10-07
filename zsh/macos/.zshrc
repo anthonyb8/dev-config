@@ -82,9 +82,6 @@ export JAVA_HOME=$(/usr/libexec/java_home -v 21)
 export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk-21.jdk/Contents/Home"
 export PATH="$JAVA_HOME/bin:$PATH"
 
-# Kitty
-KITTY_OS="macos"
-
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 source /usr/local/share/powerlevel10k/powerlevel10k.zsh-theme
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

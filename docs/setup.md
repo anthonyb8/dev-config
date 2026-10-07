@@ -63,11 +63,11 @@ linear-tui auth login
 # update: lt-update  (shell function in .zshrc; pulls and reinstalls)
 # which build am I running: linear-tui --version
 
-# settings are tracked in this repo under linear/ and synced by push.sh/pull.sh:
+# settings are tracked in this repo under linear/ and linked by link.sh:
 #   linear/config.json    theme, density, default_team, agent settings
 #   linear/prompts.json   agent prompt templates
 # credentials.json is deliberately NOT tracked (it holds the OAuth token) and
-# pull.sh never touches it, so syncing configs will not log you out.
+# link.sh links only the two named files, so syncing configs will not log you out.
 # note: config.json's log_file is an absolute path, so it needs adjusting if
 # this is ever pulled onto macOS.
 

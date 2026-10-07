@@ -42,7 +42,7 @@ MEMORY_REPO="${DEV_MEMORY_REPO:-$HOME/dev-memory}"
 
 # Role, not OS. A headless server runs the same Arch as a workstation but has no
 # terminal emulator, so its zshrc has to start tmux itself, and linking configs
-# for alacritty, kitty, rofi, mpd and rmpc would point at programs that are not
+# for alacritty, rofi, mpd and rmpc would point at programs that are not
 # installed. A marker file rather than an environment variable, because this
 # script is meant to be runnable from a timer, where no interactive environment
 # exists to carry one.
@@ -60,14 +60,6 @@ PAIRS=(
   "$SCRIPT_DIR/nvim|$HOME/.config/nvim"
   "$SCRIPT_DIR/tmux/.tmux.conf|$HOME/.tmux.conf"
   "$SCRIPT_DIR/tmux/.tmux|$HOME/.tmux"
-  "$SCRIPT_DIR/claude/CLAUDE.md|$HOME/.claude/CLAUDE.md"
-  "$SCRIPT_DIR/claude/OPINIONS.md|$HOME/.claude/OPINIONS.md"
-  "$SCRIPT_DIR/claude/VOICE.md|$HOME/.claude/VOICE.md"
-  "$SCRIPT_DIR/claude/settings.json|$HOME/.claude/settings.json"
-  "$SCRIPT_DIR/claude/skills|$HOME/.claude/skills"
-  "$SCRIPT_DIR/treehouse/config.toml|$HOME/.config/treehouse/config.toml"
-  "$SCRIPT_DIR/bin/agent-fanout|$HOME/.local/bin/agent-fanout"
-  "$SCRIPT_DIR/bin/handoff|$HOME/.local/bin/handoff"
   "$SCRIPT_DIR/linear/config.json|$HOME/.linear-tui/config.json"
   "$SCRIPT_DIR/linear/prompts.json|$HOME/.linear-tui/prompts.json"
 )
@@ -82,7 +74,6 @@ case "$OS" in
   PAIRS+=(
     "$SCRIPT_DIR/zsh/arch/.zshrc|$HOME/.zshrc"
     "$SCRIPT_DIR/alacritty/arch/alacritty.toml|$HOME/.config/alacritty/alacritty.toml"
-    "$SCRIPT_DIR/kitty/arch/kitty.conf|$HOME/.config/kitty/kitty.conf"
     "$SCRIPT_DIR/rofi/config.rasi|$HOME/.config/rofi/config.rasi"
     "$SCRIPT_DIR/mpd/mpd.conf|$HOME/.config/mpd/mpd.conf"
     "$SCRIPT_DIR/rmpc/config.ron|$HOME/.config/rmpc/config.ron"
@@ -219,8 +210,7 @@ link_one() {
 }
 
 if [[ "$MODE" == "link" ]]; then
-  mkdir -p "$HOME/.claude" "$HOME/.config/treehouse" "$HOME/.local/bin" \
-    "$HOME/.linear-tui"
+  mkdir -p "$HOME/.linear-tui"
 fi
 
 for pair in "${PAIRS[@]}"; do
@@ -235,6 +225,24 @@ if [[ -d "$MEMORY_REPO" ]]; then
 else
   echo "Skipping memory: $MEMORY_REPO does not exist."
   echo "  Create it as a PRIVATE repo, then re-run. Memory must not go in this public repo."
+fi
+
+# The Claude Code harness and its packs live in their own repositories and
+# install themselves; this only hands over to them. The packs repository is
+# private, so a machine without it still gets the harness core.
+HARNESS="${HARNESS_DIR:-$HOME/harness}"
+HARNESS_PACKS_REPO="${HARNESS_PACKS_REPO:-$HOME/harness-packs}"
+if [[ ! -x "$HARNESS/install.sh" ]]; then
+  echo "Skipping the Claude harness: $HARNESS does not exist. Clone it there, then re-run."
+elif [[ "$MODE" == "check" ]]; then
+  if ! "$HARNESS/install.sh" --check >/dev/null; then
+    echo "DRIFT: Claude harness (see $HARNESS/install.sh --check)"
+    DRIFT=$((DRIFT + 1))
+  fi
+elif [[ -d "$HARNESS_PACKS_REPO" ]]; then
+  "$HARNESS/install.sh" --pack "$HARNESS_PACKS_REPO"
+else
+  "$HARNESS/install.sh"
 fi
 
 if [[ "$MODE" == "check" ]]; then
