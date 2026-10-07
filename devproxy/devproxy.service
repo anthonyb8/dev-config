@@ -1,0 +1,16 @@
+# Keeps the devproxy SOCKS proxy to the dev server up, across sleep and network
+# changes, so the Server Browser opens instantly. The host comes from
+# DEVPROXY_HOST, else "server"; set it with `systemctl --user edit devproxy`.
+# ssh runs without a terminal here, so the key it uses needs no passphrase or
+# must already be in an agent the user session can reach.
+[Unit]
+Description=devproxy SOCKS proxy to the dev server
+After=network-online.target
+
+[Service]
+ExecStart=%h/.local/bin/devproxy
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=default.target

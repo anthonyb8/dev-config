@@ -77,12 +77,16 @@ case "$OS" in
     "$SCRIPT_DIR/rofi/config.rasi|$HOME/.config/rofi/config.rasi"
     "$SCRIPT_DIR/mpd/mpd.conf|$HOME/.config/mpd/mpd.conf"
     "$SCRIPT_DIR/rmpc/config.ron|$HOME/.config/rmpc/config.ron"
+    "$SCRIPT_DIR/devproxy/server-browser.desktop|$HOME/.local/share/applications/server-browser.desktop"
+    "$SCRIPT_DIR/devproxy/devproxy.service|$HOME/.config/systemd/user/devproxy.service"
   )
   ;;
 "debian")
   PAIRS+=(
     "$SCRIPT_DIR/zsh/debian/.zshrc|$HOME/.zshrc"
     "$SCRIPT_DIR/alacritty/debian/alacritty.toml|$HOME/.config/alacritty/alacritty.toml"
+    "$SCRIPT_DIR/devproxy/server-browser.desktop|$HOME/.local/share/applications/server-browser.desktop"
+    "$SCRIPT_DIR/devproxy/devproxy.service|$HOME/.config/systemd/user/devproxy.service"
   )
   ;;
 "darwin")
@@ -243,6 +247,17 @@ elif [[ -d "$HARNESS_PACKS_REPO" ]]; then
   "$HARNESS/install.sh" --pack "$HARNESS_PACKS_REPO"
 else
   "$HARNESS/install.sh"
+fi
+
+# A workstation keeps the devproxy tunnel to the dev server running, so the
+# Server Browser launcher opens instantly. devproxy itself comes from the
+# harness, so this waits until the harness is installed.
+if [[ "$MODE" == "link" && -L "$HOME/.config/systemd/user/devproxy.service" ]] &&
+  command -v systemctl >/dev/null && [[ -x "$HOME/.local/bin/devproxy" ]]; then
+  systemctl --user daemon-reload
+  if ! systemctl --user is-enabled --quiet devproxy.service; then
+    systemctl --user enable --now devproxy.service && echo "enabled  devproxy.service"
+  fi
 fi
 
 if [[ "$MODE" == "check" ]]; then

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Server Browser
+Comment=Chromium where localhost is the dev server, through devproxy
+# sh expands $HOME, so one file serves every machine. Inside a quoted Exec
+# argument a literal $ is \$, and the file format doubles the backslash.
+Exec=sh -c "exec \\$HOME/.local/bin/devproxy browser"
+Icon=chromium
+Terminal=false
+Categories=Network;WebBrowser;Development;

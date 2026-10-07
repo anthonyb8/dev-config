@@ -26,6 +26,7 @@ Re-running it repairs a link an application replaced with a regular file, keepin
 | `alacritty/<os>/` | `~/.config/alacritty/alacritty.toml` |
 | `linear/` | `~/.linear-tui/config.json`, `prompts.json` (never the credentials) |
 | `rofi/`, `mpd/`, `rmpc/` | desktop config, Arch workstations only |
+| `devproxy/` | a "Server Browser" launcher and an always-on `devproxy` user service, Linux workstations only; see harness's `docs/dev-servers.md` |
 | `gnome/` | nothing: scripts run by hand that write straight to dconf |
 
 ## Kept elsewhere
